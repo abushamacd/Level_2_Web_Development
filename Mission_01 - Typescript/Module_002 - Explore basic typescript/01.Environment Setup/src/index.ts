@@ -1,2 +1,4 @@
 const gettings: string = "Welcome to Level 2";
-console.log(gettings);
+const age: number = 23;
+let isAdmin = true;
+console.log(age);
