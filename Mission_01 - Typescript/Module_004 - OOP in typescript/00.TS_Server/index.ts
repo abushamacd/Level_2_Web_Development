@@ -1,24 +1,43 @@
-class Common {
-  name: string;
-  age: number;
-  address: string;
-
-  constructor(name: string, age: number, address: string) {
-    this.name = name;
-    this.age = age;
-    this.address = address;
-  }
-
-  makeSleep(hours: number): string {
-    return `${this.name} take sleep ${hours} hours `;
+// instaceof guard
+class Animal {
+  constructor(public name: string, public species: string) {}
+  makeSound() {
+    console.log(`Make sound`);
   }
 }
 
-class Student extends Common {
-  constructor(name: string, age: number, address: string) {
-    super(name, age, address);
+class Dog extends Animal {
+  constructor(name: string, species: string) {
+    super(name, species);
+  }
+  makeBarking() {
+    console.log(`Barking`);
   }
 }
 
-const student1 = new Student("Shama", 26, "Chuadnaga");
-console.log(student1.makeSleep(8));
+class Cat extends Animal {
+  constructor(name: string, species: string) {
+    super(name, species);
+  }
+  makeMeawing() {
+    console.log(`Meawing`);
+  }
+}
+
+function getAnimal(animal: Animal) {
+  if (animal instanceof Dog) {
+    animal.makeBarking();
+  } else if (animal instanceof Cat) {
+    animal.makeMeawing();
+  } else {
+    animal.makeSound();
+  }
+}
+
+const dog = new Dog("Tom", "Dog");
+const cat = new Cat("Tom", "Cat");
+const animal = new Animal("Tom", "Cat");
+
+getAnimal(dog);
+getAnimal(cat);
+getAnimal(animal);
