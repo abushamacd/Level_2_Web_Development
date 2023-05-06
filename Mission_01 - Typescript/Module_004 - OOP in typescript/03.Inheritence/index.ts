@@ -21,4 +21,17 @@ class Student extends Common {
 }
 
 const student1 = new Student("Shama", 26, "Chuadnaga");
-console.log(student1.makeSleep(8));
+student1.makeSleep(8);
+
+class Teacher extends Common {
+  designation: string;
+
+  constructor(name: string, age: number, address: string, designation: string) {
+    super(name, age, address);
+    this.designation = designation;
+  }
+
+  takeClass(numOfClass: number): string {
+    return `${this.name} take sleep ${numOfClass} hours `;
+  }
+}
