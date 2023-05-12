@@ -1,0 +1,25 @@
+স্বাগতম তোমাকে নতুন একটা মিশনে। আজকে থেকে আমরা Mongoose শিখবো। আজকে ইনস্টলেশন এবং কুয়েরী Read and Write এক্সপ্লোর করবো।
+
+
+
+ফুল এই মাইলস্টোনে তোমাকে খুব মনোযোগী থাকতে হবে কারণ সামনের প্রোজেক্টগুলোতে এই মাইলস্টোনের লার্নিং সরাসরি কাজে লাগবে।
+
+
+
+GitHub Link: https://github.com/Apollo-Level2-Web-Dev/mongoose-module-6
+
+
+
+এই মিশনের আউটলাইনঃ
+
+
+
+Thursday 11 May, Module: 6: Installation and Explore Read and Write Queries
+
+Sunday 14 May , Module 7: Explore Mongoose Update and Delete Queries
+
+Tuesday 16 May, Module 8: Explore Powerful Aggregation Framework and Indexing
+
+Thursday 18 May, Module 8.5: Practice
+
+Sunday 21 May, Module 9: Assignment
