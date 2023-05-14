@@ -1,118 +1,20 @@
 import express, { Application, Request, Response } from "express";
 import cors from "cors";
 import colors from "colors";
+import userRoute from "../app/modules/user/user.route";
 const app: Application = express();
-import { Schema, model, connect } from "mongoose";
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Data API
+app.use("/api/v1/user", userRoute);
+
 // Testing API
 app.get("/", (req: Request, res: Response) => {
-  res.send("+++ App running Successfully +++");
-});
-
-// Testing API
-app.get("/user", (req: Request, res: Response) => {
-  //   create user interface
-  interface IUser {
-    id: string;
-    role: string;
-    name: {
-      firstName: string;
-      lastName: string;
-    };
-    password: string;
-    dateOfBirth?: string;
-    gender: "male" | "female";
-    email?: string;
-    contactNo: string;
-    emargencyContactNo: string;
-    presentAddress: string;
-    permanentAddress: string;
-  }
-
-  // 2. Create a Schema corresponding to the document interface.
-  const userSchema = new Schema<IUser>({
-    id: {
-      type: String,
-      required: true,
-      unique: true,
-    },
-    role: {
-      type: String,
-      required: true,
-    },
-    name: {
-      firstName: {
-        type: String,
-        required: true,
-      },
-      lastName: {
-        type: String,
-        required: true,
-      },
-    },
-    dateOfBirth: {
-      type: String,
-    },
-    password: {
-      type: String,
-      required: true,
-    },
-    gender: {
-      type: String,
-      enum: ["male", "female"],
-      required: true,
-    },
-    email: {
-      type: String,
-    },
-    contactNo: {
-      type: String,
-      required: true,
-    },
-    emargencyContactNo: {
-      type: String,
-      required: true,
-    },
-    presentAddress: {
-      type: String,
-      required: true,
-    },
-    permanentAddress: {
-      type: String,
-      required: true,
-    },
-  });
-
-  // 3. Create a Model.
-  const User = model<IUser>("User", userSchema);
-
-  // 4
-  const createUser = async () => {
-    const user = new User({
-      id: "121212",
-      role: "student",
-      name: {
-        firstName: "Abu2",
-        lastName: "Shama",
-      },
-      password: "bolbona",
-      dateOfBirth: "25, April 2000",
-      gender: "male",
-      email: "test@test.com",
-      contactNo: "01982938723",
-      emargencyContactNo: "01982938723",
-      presentAddress: "Rangpur",
-      permanentAddress: "Chudanga",
-    });
-    await user.save();
-  };
-
-  createUser();
+  res.send("+++ App Running Successfully +++");
 });
 
 // Unknown API Handle
