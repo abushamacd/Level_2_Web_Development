@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
-import { createUserService } from "./user.services";
+import { createUserService, getUsersService } from "./user.services";
+import { IUser } from "./user.interface";
 
 export const createUser = async (
   req: Request,
@@ -7,7 +8,8 @@ export const createUser = async (
   next: NextFunction
 ) => {
   try {
-    const result = await createUserService();
+    const data: IUser = req.body;
+    const result = await createUserService(data);
     res.status(400).send({
       success: true,
       message: "Create user successfully",
@@ -17,6 +19,27 @@ export const createUser = async (
     res.status(400).send({
       success: false,
       message: "Create user failed",
+      retust: error,
+    });
+  }
+};
+
+export const getUsers = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const result = await getUsersService();
+    res.status(400).send({
+      success: true,
+      message: "Get users successfully",
+      retust: result,
+    });
+  } catch (error) {
+    res.status(400).send({
+      success: false,
+      message: "Get users failed",
       retust: error,
     });
   }
