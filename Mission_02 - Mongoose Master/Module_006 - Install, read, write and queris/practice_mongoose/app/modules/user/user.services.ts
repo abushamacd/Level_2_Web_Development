@@ -10,3 +10,10 @@ export const getUsersService = async (): Promise<IUser[]> => {
   const users = await User.find();
   return users;
 };
+
+export const getUserService = async (
+  payload: string
+): Promise<IUser | null> => {
+  const users = await User.findOne({ id: payload });
+  return users;
+};
