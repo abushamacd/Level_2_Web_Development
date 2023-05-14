@@ -87,6 +87,32 @@ app.get("/user", (req: Request, res: Response) => {
       required: true,
     },
   });
+
+  // 3. Create a Model.
+  const User = model<IUser>("User", userSchema);
+
+  // 4
+  const createUser = async () => {
+    const user = new User({
+      id: "121212",
+      role: "student",
+      name: {
+        firstName: "Abu2",
+        lastName: "Shama",
+      },
+      password: "bolbona",
+      dateOfBirth: "25, April 2000",
+      gender: "male",
+      email: "test@test.com",
+      contactNo: "01982938723",
+      emargencyContactNo: "01982938723",
+      presentAddress: "Rangpur",
+      permanentAddress: "Chudanga",
+    });
+    await user.save();
+  };
+
+  createUser();
 });
 
 // Unknown API Handle
