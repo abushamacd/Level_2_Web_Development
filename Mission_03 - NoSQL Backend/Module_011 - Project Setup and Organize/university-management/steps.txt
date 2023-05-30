@@ -4,3 +4,5 @@ install packeage - yarn add express mongoose cors dotenv colors
 init ts config - tsc --init and configure
 create git ignore file 
 setup server
+install eslint
+configure eslint
