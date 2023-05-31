@@ -12,3 +12,5 @@ huskey
     yarn husky install
     yarn husky add .husky/pre-commit "npm test"
     change in precommit file - yarn lint:check
+
+lint stage
