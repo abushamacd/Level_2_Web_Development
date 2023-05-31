@@ -1,6 +1,6 @@
 import express, { Application, Request, Response } from 'express'
 import cors from 'cors'
-// import userRoute from "../app/modules/user/user.route";
+import userRoute from '../src/app/modules/users/user.route'
 const app: Application = express()
 
 // Middleware
@@ -9,7 +9,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 // Data API
-// app.use("/api/v1/user", userRoute);
+app.use('/api/v1/user', userRoute)
 
 // Testing API
 app.get('/', (req: Request, res: Response) => {
