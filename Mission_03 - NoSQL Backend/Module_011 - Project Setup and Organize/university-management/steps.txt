@@ -6,3 +6,9 @@ create git ignore file
 setup server
 install eslint
 configure eslint
+huskey
+=======
+    yarn add husky --dev
+    yarn husky install
+    yarn husky add .husky/pre-commit "npm test"
+    change in precommit file - yarn lint:check
