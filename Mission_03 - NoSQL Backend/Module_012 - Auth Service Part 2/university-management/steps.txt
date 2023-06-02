@@ -1,0 +1,151 @@
+Initialize packeage.json
+--------------------------
+        : npm init
+
+install typescript
+-------------------
+        : yarn add -D typescript
+
+install primary packeages
+-------------------------
+        : yarn add express mongoose cors dotenv
+        : yarn add -D @types/express @types/cors
+
+init and configure ts config 
+----------------------------
+        : tsc --init
+        change rootDir and outDir location
+
+create git ignore file and configure
+------------------------------------
+        : .gitignore
+        node_modules
+        package-lock.json
+        .env
+        yarn.lock
+
+create middleware folder 
+------------------------
+        : create src folder in the root directory
+        : create middleware folder in the src folder
+        : create errorHandler.ts file in the middleware folder and export
+
+create config folder 
+------------------------
+        : create config folder in the src folder
+        : create index.ts file in the config folder
+        : create .env file in the root directory and write your server secret
+        : configure the porject and export the configurations
+
+create utilities folder 
+------------------------
+        : create utilities folder in the src folder
+        : create dbConnect.ts file in the utilities folder and export
+
+create server and configure
+---------------------------
+        : create app.ts in the src folder
+        : create server.ts
+
+install ts-node-dev and configure package.json
+----------------------------------------------
+        : yarn add ts-node-dev --dev
+        Write script
+            "start": "ts-node-dev --respawn --transpile-only src/server.ts",
+
+install eslint and configure - https://blog.logrocket.com/linting-typescript-eslint-prettier/
+---------------------------------------------------------------------------------------------
+        Peast this code into tsconfig.json in first
+            "include": ["src"],
+            "exclude": ["node_modules"],
+        Install eslint    
+            : yarn add -D eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin
+        Create .eslintrc in the root directory and peast the code
+            {
+                "parser": "@typescript-eslint/parser",
+                "parserOptions": {
+                    "ecmaVersion": 13,
+                    "sourceType": "module"
+                },
+                "plugins": ["@typescript-eslint"],
+                // HERE
+                "extends": [
+                    "eslint:recommended",
+                    "plugin:@typescript-eslint/recommended",
+                    "prettier"
+                ],
+
+                "rules": {
+                    "no-unused-vars": "error",
+                    "no-console": "error",
+                    "no-undef": "error",
+                    "no-unused-expressions": "error",
+                    "no-unreachable": "error",
+                    "@typescript-eslint/consistent-type-definitions": ["error", "type"]
+                },
+
+                "env": {
+                    "browser": true,
+                    "es2021": true
+                }
+            }
+        Create .eslintignore in the root directory and peast line
+            node_modules
+            dist
+            .env
+        Write this script in package.json
+            "lint:check": "eslint --ignore-path .eslintignore --ext .js,.ts .",
+
+Install extention on IDE eslint and prettier and configure
+-----------------------------------------------------------
+        ESLint by microsoft - https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint
+        prettier by prettier - https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
+        Write these line in settings.json on your IDE
+            {
+                "editor.defaultFormatter": "esbenp.prettier-vscode",
+                "editor.formatOnSave": true,
+            }
+
+
+install prettier and configure - https://blog.logrocket.com/linting-typescript-eslint-prettier/
+-----------------------------------------------------------------------------------------------
+        Install prettier on your server and configure
+            yarn add -D prettier eslint-config-prettier
+        create .prettierrc in the root directory and peast the line 
+            {
+                "semi": false,
+                "singleQuote": true,
+                "arrowParens": "avoid"
+            }
+        Write this script in package.json
+            "prettier:check": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
+
+install husky - https://typicode.github.io/husky/getting-started.html
+---------------------------------------------------------------------
+        : yarn add husky --dev
+        : yarn husky install
+        : yarn husky add .husky/pre-commit "npm test"
+        Write this script in package.json
+            "lint-prettier": "yarn lint:check && yarn prettier:check",
+        change in precommit file in the husky folder 
+            : remove npm code and add here yarn lint-prettier
+
+install lint-staged and configure
+---------------------------------
+        : yarn add -D lint-staged
+        Write the code in package.json after the script object
+            "lint-staged": {
+                                "src/**/*.ts": "yarn lint-prettier"
+                            },
+
+Congifure vs code setting
+---------------------------------------------
+        create .vscode folder in the root directory
+        create setting.json in the .vscode folder
+        peast the code in the setting.json which you create previous step
+            {
+                "editor.codeActionsOnSave": {
+                    "source.fixAll.eslint": true,
+                    "source.organizeImports": true
+                }
+            }
