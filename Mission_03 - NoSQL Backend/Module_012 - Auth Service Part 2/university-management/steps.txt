@@ -81,7 +81,7 @@ install eslint and configure - https://blog.logrocket.com/linting-typescript-esl
                     "no-undef": "error",
                     "no-unused-expressions": "error",
                     "no-unreachable": "error",
-                    "consistent-type-definitions": ["error", "type"]
+                    "@typescript-eslint/consistent-type-definitions": ["error", "type"]
                 },
 
                 "env": {
