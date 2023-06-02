@@ -183,3 +183,6 @@ Install winston and configure - https://www.npmjs.com/package/winston
                 ],
             })
 
+            install daily logger
+                : yarn add winston-daily-rotate-file
+
