@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 import app from './app'
 import config from './config/index'
-import { logger } from './utilities/logger'
+import { errorLogger, logger } from './utilities/logger'
 
 // db connection
 async function dbConnect() {
@@ -14,7 +14,7 @@ async function dbConnect() {
     })
     logger.info(`==== ✌️  DB Connection is succesfully ====`)
   } catch (error) {
-    logger.error(`==== 🤞  Database Connection Error ====`)
+    errorLogger.error(`==== 🤞  Database Connection Error ====`)
   }
 }
 
