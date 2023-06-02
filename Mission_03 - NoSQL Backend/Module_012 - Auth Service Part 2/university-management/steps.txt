@@ -210,3 +210,5 @@ Install winston and configure - https://www.npmjs.com/package/winston
                     }),
                 ],
             })
+
+        user logger which you want to console log

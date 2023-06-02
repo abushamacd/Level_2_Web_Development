@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
 import config from '../config'
 import { IErrorMessage } from '../interface/error'
+import { handleValidationError } from './handleValidationError'
 
 export const globarError = (
   err: any,
@@ -11,6 +12,13 @@ export const globarError = (
   const statusCode = 400
   const message = 'Something went wrong'
   const errorMessage: IErrorMessage[] = []
+
+  //
+  if (err?.name === 'ValidationError') {
+    const simplifiedError = handleValidationError(err)
+  }
+
+  //
   res.status(statusCode).send({
     success: false,
     message,
