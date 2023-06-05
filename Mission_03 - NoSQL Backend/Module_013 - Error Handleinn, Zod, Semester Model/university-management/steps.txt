@@ -18,34 +18,12 @@ init and configure ts config
 
 create git ignore file and configure
 ------------------------------------
-        : .gitignore
         node_modules
         package-lock.json
         .env
         yarn.lock
-
-create middleware folder 
-------------------------
-        : create src folder in the root directory
-        : create middleware folder in the src folder
-        : create errorHandler.ts file in the middleware folder and export
-
-create config folder 
-------------------------
-        : create config folder in the src folder
-        : create index.ts file in the config folder
-        : create .env file in the root directory and write your server secret
-        : configure the porject and export the configurations
-
-create utilities folder 
-------------------------
-        : create utilities folder in the src folder
-        : create dbConnect.ts file in the utilities folder and export
-
-create server and configure
----------------------------
-        : create app.ts in the src folder
-        : create server.ts
+        *.log
+        *audit.json
 
 install ts-node-dev and configure package.json
 ----------------------------------------------
@@ -98,6 +76,7 @@ install eslint and configure - https://blog.logrocket.com/linting-typescript-esl
             node_modules
             dist
             .env
+
         Write this script in package.json
             "lint:check": "eslint --ignore-path .eslintignore --ext .js,.ts .",
 
@@ -155,12 +134,48 @@ Congifure vs code setting
                 }
             }
 
+
+create config folder 
+------------------------
+        : create src folder in the root directory
+        : create config folder in the src folder
+        : create .env file in the root directory and write your server secret
+        create index.ts file in the config folder
+            import dotenv from 'dotenv'
+            import path from 'path'
+            dotenv.config({ path: path.join(process.cwd(), '.env') })
+
+            export default {
+                env: process.env.NODE_ENV,
+                port: process.env.PORT,
+                db_uri: process.env.DB_URI,
+                user_default_pass: process.env.USER_DEFAULT_PASS,
+            }
+
+create interface folder 
+------------------------
+        create interface folder in the src directory
+        create error.ts  in the interface folder and paste the code
+            export type IErrorMessage = {
+                    path: string
+                    message: string
+                }
+        create common.ts  in the interface folder and paste the code
+            import { IErrorMessage } from './error'
+
+            export type IErrorResponse = {
+            statusCode: number
+            message: string
+            errorMessage: IErrorMessage[]
+            }
+
 Install winston and configure - https://www.npmjs.com/package/winston
 ---------------------------------------------------------------------
         : yarn add winston
-        create logger.ts in the utilities folder
         install daily logger
                 : yarn add winston-daily-rotate-file
+        create utilities folder in the src directory
+        create logger.ts in the utilities folder
         peast the code in logger.ts
             /* eslint-disable no-undef */
             import { createLogger, format, transports } from 'winston'
@@ -216,4 +231,205 @@ Install winston and configure - https://www.npmjs.com/package/winston
                 ],
             })
 
-        user logger which you want to console log
+create interface folder 
+------------------------
+        create errorFormating folder in the src directory
+        create handleValidationError.ts  in the interface folder and paste the code
+            import mongoose from 'mongoose'
+            import { IErrorMessage } from '../interface/error'
+            import { IErrorResponse } from '../interface/common'
+
+            export const handleValidationError = (
+            err: mongoose.Error.ValidationError
+            ): IErrorResponse => {
+                const errors: IErrorMessage[] = Object.values(err.errors).map(el => {
+                    return {
+                        path: el?.path,
+                        message: el?.message,
+                    }
+                })
+
+                return {
+                    statusCode: 500,
+                    message: 'Validation Error',
+                    errorMessage: errors,
+                }
+            }
+
+        create common.ts  in the interface folder and paste the code
+            export class ApiError extends Error {
+                statusCode: number
+                constructor(statusCode: number, message: string | undefined, stack = '') {
+                    super(message)
+                    this.statusCode = statusCode
+                    if (stack) {
+                    this.stack = stack
+                    } else {
+                    Error.captureStackTrace(this, this.constructor)
+                    }
+                }
+            }
+
+create middleware folder 
+------------------------
+        create middleware folder in the src folder
+        create globalError.ts file in the middleware folder and paste the code
+            /* eslint-disable no-unused-expressions */
+            /* eslint-disable no-console */
+            import { ErrorRequestHandler } from 'express'
+            import config from '../config'
+            import { IErrorMessage } from '../interface/error'
+            import { handleValidationError } from '../errorFormating/handleValidationError'
+            import { ApiError } from '../errorFormating/apiError'
+            import { errorLogger } from '../utilities/logger'
+
+            export const globarError: ErrorRequestHandler = (error, req, res, next) => {
+                let statusCode = 400
+                let message = 'Something went wrong'
+                let errorMessage: IErrorMessage[] = []
+
+                // Dependency
+                config.env === 'development'
+                    ? console.log(`Global Error Handler ==`, error)
+                    : errorLogger.error(`Global Error Handler ==`, error)
+
+                // Check
+                if (error?.name === 'ValidationError') {
+                    const simplifiedError = handleValidationError(error)
+                    statusCode = simplifiedError.statusCode
+                    message = simplifiedError.message
+                    errorMessage = simplifiedError.errorMessage
+                } else if (error instanceof ApiError) {
+                    statusCode = error?.statusCode
+                    message = error?.message
+                    errorMessage = error?.message
+                    ? [
+                        {
+                            path: '',
+                            message: error?.message,
+                        },
+                        ]
+                    : []
+                } else if (error instanceof Error) {
+                    message = error?.message
+                    errorMessage = error?.message
+                    ? [
+                        {
+                            path: '',
+                            message: error?.message,
+                        },
+                        ]
+                    : []
+                }
+
+                // Return Response
+                res.status(statusCode).send({
+                    success: false,
+                    message,
+                    errorMessage,
+                    stack: config.env !== 'production' ? error?.stack : undefined,
+                })
+                next()
+            }
+
+create utilities folder 
+------------------------
+        create bootStrap.ts file in the utilities folder and paste the code
+            /* eslint-disable no-console */
+            import mongoose from 'mongoose'
+            import config from '../config'
+            import app from '../app'
+            import { errorLogger, logger } from './logger'
+            import { Server } from 'http'
+            let server: Server
+
+            export async function bootStrap() {
+                try {
+                    await mongoose.connect(config.db_uri as string)
+                    server = app.listen(config.port, (): void => {
+                    logger.info(
+                        `==== ✌️  Your server is running on http://localhost:${config.port} ====`
+                    )
+                    })
+                    logger.info(`==== ✌️  DB Connection is succesfully ====`)
+                } catch (error) {
+                    errorLogger.error(`==== 🤞  Database Connection Error ====`, error)
+                }
+
+                process.on('unhandledRejection', error => {
+                    console.log(error)
+                    if (server) {
+                    server.close(() => {
+                        errorLogger.error(error)
+                        process.exit(1)
+                    })
+                    } else {
+                    process.exit(1)
+                    }
+                })
+            }
+
+create server and configure
+---------------------------
+        create app.ts in the src folder
+            import express, { Application, Request, Response, NextFunction } from 'express'
+            import cors from 'cors'
+            import userRoute from '../src/app/modules/users/user.route'
+            import { globarError } from './middleware/globalError'
+            const app: Application = express()
+
+            // Middleware
+            app.use(cors())
+            app.use(express.json())
+            app.use(express.urlencoded({ extended: true }))
+
+            // Data API
+            app.use('/api/v1/user', userRoute)
+
+            // Testing API
+            app.get('/', (req: Request, res: Response, next: NextFunction) => {
+                res.send('+++ App Running Successfully +++')
+                next()
+                // Uncought Error
+                // console.log(x)
+
+                // Test Error
+                // throw new Error('General Error')
+
+                // Test API Error
+                // throw new ApiError(403, 'API Error')
+
+                // Promiss rejection
+                // Promise.reject(new Error(`Unhandle Promiss Rejection`))
+            })
+
+            // Global error handle
+            app.use(globarError)
+
+            // Unknown API Handle
+            app.all('*', (req: Request, res: Response) => {
+                res.send(`+++ Requested Route Not Found +++`)
+            })
+
+            export default app
+
+        create server.ts
+            import { errorLogger, logger } from './utilities/logger'
+            import { bootStrap } from './utilities/bootStrap'
+            import { Server } from 'http'
+            let server: Server
+
+            process.on('uncaughtException', error => {
+                errorLogger.error(error)
+                process.exit(1)
+            })
+
+            bootStrap()
+
+            process.on('SIGTERM', () => {
+                logger.info(`Sigterm is received`)
+                if (server) {
+                    server.close()
+                }
+            })
+

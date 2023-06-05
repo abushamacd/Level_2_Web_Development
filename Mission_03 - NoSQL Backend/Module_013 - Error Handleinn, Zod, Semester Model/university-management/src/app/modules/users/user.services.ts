@@ -15,6 +15,5 @@ export const createUserService = async (data: IUser): Promise<IUser | null> => {
   if (!result) {
     throw new Error('User create failed')
   }
-  console.log(result)
   return result
 }

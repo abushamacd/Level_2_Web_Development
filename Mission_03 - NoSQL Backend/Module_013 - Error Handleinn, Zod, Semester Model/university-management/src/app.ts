@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use('/api/v1/user', userRoute)
 
 // Testing API
-app.get('/', async (req: Request, res: Response, next: NextFunction) => {
+app.get('/', (req: Request, res: Response, next: NextFunction) => {
   res.send('+++ App Running Successfully +++')
   next()
   // Uncought Error

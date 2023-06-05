@@ -3,8 +3,8 @@
 import { ErrorRequestHandler } from 'express'
 import config from '../config'
 import { IErrorMessage } from '../interface/error'
-import { handleValidationError } from './handleValidationError'
-import { ApiError } from './apiError'
+import { handleValidationError } from '../errorFormating/handleValidationError'
+import { ApiError } from '../errorFormating/apiError'
 import { errorLogger } from '../utilities/logger'
 
 export const globarError: ErrorRequestHandler = (error, req, res, next) => {
