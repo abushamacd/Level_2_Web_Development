@@ -1,13 +1,21 @@
+/* eslint-disable no-unused-expressions */
+/* eslint-disable no-console */
 import { ErrorRequestHandler } from 'express'
 import config from '../config'
 import { IErrorMessage } from '../interface/error'
 import { handleValidationError } from './handleValidationError'
 import { ApiError } from './apiError'
+import { errorLogger } from '../utilities/logger'
 
 export const globarError: ErrorRequestHandler = (error, req, res, next) => {
   let statusCode = 400
   let message = 'Something went wrong'
   let errorMessage: IErrorMessage[] = []
+
+  // Dependency
+  config.env === 'development'
+    ? console.log(`Global Error Handler ==`, error)
+    : errorLogger.error(`Global Error Handler ==`, error)
 
   //
   if (error?.name === 'ValidationError') {

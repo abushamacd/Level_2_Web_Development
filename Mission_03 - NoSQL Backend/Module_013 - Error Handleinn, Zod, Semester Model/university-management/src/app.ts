@@ -14,9 +14,16 @@ app.use('/api/v1/user', userRoute)
 
 // Testing API
 app.get('/', async (req: Request, res: Response, next: NextFunction) => {
-  // res.send('+++ App Running Successfully +++')
-  // next()
-  Promise.reject(new Error('eeee'))
+  res.send('+++ App Running Successfully +++')
+  next()
+  // Uncought Error
+  // console.log(x)
+  // Test Error
+  // throw new Error('General Error')
+  // Test API Error
+  // throw new ApiError(403, 'API Error')
+  // Promiss rejection
+  // Promise.reject(new Error(`Unhandle Promiss Rejection`))
 })
 
 // Global error handle

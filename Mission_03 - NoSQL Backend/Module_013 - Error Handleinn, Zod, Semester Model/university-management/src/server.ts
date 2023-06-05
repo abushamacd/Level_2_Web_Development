@@ -4,10 +4,15 @@ import app from './app'
 import config from './config/index'
 import { errorLogger, logger } from './utilities/logger'
 import { Server } from 'http'
+let server: Server
+
+process.on('uncaughtException', error => {
+  errorLogger.error(error)
+  process.exit(1)
+})
 
 // db connection
 async function dbConnect() {
-  let server: Server
   try {
     await mongoose.connect(config.db_uri as string)
     server = app.listen(config.port, (): void => {
@@ -34,3 +39,10 @@ async function dbConnect() {
 }
 
 dbConnect()
+
+process.on('SIGTERM', () => {
+  logger.info(`Sigterm is received`)
+  if (server) {
+    server.close()
+  }
+})
