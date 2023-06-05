@@ -13,9 +13,10 @@ app.use(express.urlencoded({ extended: true }))
 app.use('/api/v1/user', userRoute)
 
 // Testing API
-app.get('/', (req: Request, res: Response, next: NextFunction) => {
-  res.send('+++ App Running Successfully +++')
-  next()
+app.get('/', async (req: Request, res: Response, next: NextFunction) => {
+  // res.send('+++ App Running Successfully +++')
+  // next()
+  Promise.reject(new Error('eeee'))
 })
 
 // Global error handle
