@@ -6,6 +6,8 @@ import { IErrorMessage } from '../interface/error'
 import { handleValidationError } from '../errorFormating/handleValidationError'
 import { ApiError } from '../errorFormating/apiError'
 import { errorLogger } from '../utilities/logger'
+import { ZodError } from 'zod'
+import { handleZodError } from '../errorFormating/handleZodError'
 
 export const globarError: ErrorRequestHandler = (error, req, res, next) => {
   let statusCode = 400
@@ -20,6 +22,11 @@ export const globarError: ErrorRequestHandler = (error, req, res, next) => {
   //
   if (error?.name === 'ValidationError') {
     const simplifiedError = handleValidationError(error)
+    statusCode = simplifiedError.statusCode
+    message = simplifiedError.message
+    errorMessage = simplifiedError.errorMessage
+  } else if (error instanceof ZodError) {
+    const simplifiedError = handleZodError(error)
     statusCode = simplifiedError.statusCode
     message = simplifiedError.message
     errorMessage = simplifiedError.errorMessage
