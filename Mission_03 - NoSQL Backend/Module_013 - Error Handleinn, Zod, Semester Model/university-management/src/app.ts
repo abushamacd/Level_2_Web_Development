@@ -1,8 +1,8 @@
 import express, { Application, Request, Response, NextFunction } from 'express'
 import cors from 'cors'
-import userRoute from '../src/app/modules/users/user.route'
-import acaSemRoute from '../src/app/modules/academicSemester/acaSem.route'
+
 import { globarError } from './middleware/globalError'
+import routers from './app/routes'
 const app: Application = express()
 
 // Middleware
@@ -11,8 +11,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 // Data API
-app.use('/api/v1/user', userRoute)
-app.use('/api/v1/acasem', acaSemRoute)
+app.use('/api/v1', routers)
 
 // Testing API
 app.get('/', (req: Request, res: Response, next: NextFunction) => {
