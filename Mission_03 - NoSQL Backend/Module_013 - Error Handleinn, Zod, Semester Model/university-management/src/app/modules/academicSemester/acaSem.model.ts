@@ -1,20 +1,6 @@
 import { Schema, model } from 'mongoose'
-import { AcaSemModel, IAcaSem, Month } from './acaSem.interface'
-
-const months: Month[] = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-]
+import { AcaSemModel, IAcaSem } from './acaSem.interface'
+import { acaSemCodes, acaSemMonths, acaSemTitles } from './acaSem.contant'
 
 const acaSemSchema = new Schema<IAcaSem>(
   {
@@ -22,7 +8,7 @@ const acaSemSchema = new Schema<IAcaSem>(
       type: String,
       required: true,
       trim: true,
-      enum: ['Autumn', 'Summer', 'Fall'],
+      enum: acaSemTitles,
     },
     year: {
       type: Number,
@@ -31,18 +17,18 @@ const acaSemSchema = new Schema<IAcaSem>(
     code: {
       type: String,
       required: true,
-      enum: ['01', '02', '03'],
+      enum: acaSemCodes,
       trim: true,
     },
     startMonth: {
       type: String,
       required: true,
-      enum: months,
+      enum: acaSemMonths,
     },
     endMonth: {
       type: String,
       required: true,
-      enum: months,
+      enum: acaSemMonths,
     },
   },
   {

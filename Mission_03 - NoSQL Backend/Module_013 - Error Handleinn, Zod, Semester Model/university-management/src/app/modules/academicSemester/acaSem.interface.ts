@@ -1,6 +1,6 @@
 import { Model } from 'mongoose'
 
-export type Month =
+export type IAcaSemMonths =
   | 'January'
   | 'February'
   | 'March'
@@ -14,12 +14,15 @@ export type Month =
   | 'November'
   | 'December'
 
+export type IAcaSemTitles = 'Autumn' | 'Summer' | 'Fall'
+export type IAcaSemCodes = '01' | '02' | '03'
+
 export type IAcaSem = {
-  title: 'Autumn' | 'Summer' | 'Fall'
+  title: IAcaSemTitles
   year: number
-  code: '01' | '02' | '03'
-  startMonth: Month
-  endMonth: Month
+  code: IAcaSemCodes
+  startMonth: IAcaSemMonths
+  endMonth: IAcaSemMonths
 }
 
 export type AcaSemModel = Model<IAcaSem, Record<string, unknown>>
