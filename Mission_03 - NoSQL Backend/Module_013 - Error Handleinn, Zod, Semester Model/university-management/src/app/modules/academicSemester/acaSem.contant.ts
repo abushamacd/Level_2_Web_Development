@@ -18,3 +18,11 @@ export const acaSemMonths: IAcaSemMonths[] = [
   'November',
   'December',
 ]
+
+export const acaSemTitleCodeMapper: {
+  [key: string]: string
+} = {
+  Autumn: '01',
+  Summer: '02',
+  Fall: '03',
+}
