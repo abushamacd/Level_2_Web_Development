@@ -1,6 +1,8 @@
 import { Schema, model } from 'mongoose'
 import { AcaSemModel, IAcaSem } from './acaSem.interface'
 import { acaSemCodes, acaSemMonths, acaSemTitles } from './acaSem.contant'
+import status from 'http-status'
+import { ApiError } from '../../../errorFormating/apiError'
 
 const acaSemSchema = new Schema<IAcaSem>(
   {
@@ -35,6 +37,14 @@ const acaSemSchema = new Schema<IAcaSem>(
     timestamps: true,
   }
 )
+
+acaSemSchema.pre('save', async function (next) {
+  const isExist = await AcaSem.findOne({ title: this.title, year: this.year })
+  if (isExist) {
+    throw new ApiError(status.CONFLICT, 'Academic Semester is alreadey exist')
+  }
+  next()
+})
 
 export const AcaSem = model<IAcaSem, AcaSemModel>(
   'Academic_Semester',
