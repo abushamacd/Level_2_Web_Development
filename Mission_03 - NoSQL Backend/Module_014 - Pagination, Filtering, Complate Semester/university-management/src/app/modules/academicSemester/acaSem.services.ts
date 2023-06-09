@@ -1,4 +1,5 @@
 import { ApiError } from '../../../errorFormating/apiError'
+import { IPeginationOptions } from '../../../interface/pagination'
 import { acaSemTitleCodeMapper } from './acaSem.contant'
 import { IAcaSem } from './acaSem.interface'
 import { AcaSem } from './acaSem.model'
@@ -14,5 +15,12 @@ export const createAcaSemService = async (
   if (!result) {
     throw new Error('Academic Semester create failed')
   }
+  return result
+}
+
+export const getAllSemestersService = async (
+  payload: IPeginationOptions
+): Promise<IAcaSem | null> => {
+  const result = await AcaSem.create(payload)
   return result
 }
