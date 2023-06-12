@@ -56,9 +56,6 @@ export const getAllSemestersService = async (
     sortConditions[sortBy] = sortOrder
   }
 
-  // eslint-disable-next-line no-console
-  // console.log(sortConditions)
-
   const filterConditions =
     searchConditions.length > 0 ? { $and: searchConditions } : {}
 
@@ -98,5 +95,15 @@ export const updateSemesterServices = async (
   const result = await AcaSem.findOneAndUpdate({ _id: id }, payload, {
     new: true,
   })
+  return result
+}
+
+export const deleteSemesterServices = async (id: string) => {
+  const result = await AcaSem.findOneAndDelete(
+    { _id: id },
+    {
+      new: true,
+    }
+  )
   return result
 }

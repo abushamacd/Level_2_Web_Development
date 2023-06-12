@@ -10,7 +10,7 @@ import { ZodError } from 'zod'
 import { handleZodError } from '../errorFormating/handleZodError'
 import { handleCastError } from '../errorFormating/handleCastError'
 
-export const globarError: ErrorRequestHandler = (error, req, res, next) => {
+export const globarError: ErrorRequestHandler = (error, req, res) => {
   let statusCode = 400
   let message = 'Something went wrong'
   let errorMessage: IErrorMessage[] = []
@@ -66,5 +66,4 @@ export const globarError: ErrorRequestHandler = (error, req, res, next) => {
     errorMessage,
     stack: config.env !== 'production' ? error?.stack : undefined,
   })
-  next()
 }

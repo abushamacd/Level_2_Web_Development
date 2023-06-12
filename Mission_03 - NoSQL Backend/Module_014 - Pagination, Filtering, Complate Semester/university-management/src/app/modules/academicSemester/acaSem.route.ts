@@ -3,6 +3,7 @@ import reqValidate from '../../../middleware/reqValidate'
 import { createAcaSemZod, updateAcaSemZod } from './acaSem.validation'
 import {
   createAcaSem,
+  deleteAcaSem,
   getAllSemesters,
   getSingleSemester,
   updateAcaSem,
@@ -13,6 +14,7 @@ router
   .route('/:id')
   .get(getSingleSemester)
   .patch(reqValidate(updateAcaSemZod), updateAcaSem)
+  .delete(deleteAcaSem)
 
 router
   .route('/')
