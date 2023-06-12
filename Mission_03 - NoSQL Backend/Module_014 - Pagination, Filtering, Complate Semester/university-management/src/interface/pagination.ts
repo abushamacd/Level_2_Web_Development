@@ -1,6 +1,6 @@
 export type IPeginationOptions = {
-  page: number
-  limit: number
-  sortBy: string
-  SortOrder: string
+  page?: number
+  limit?: number
+  sortBy?: string
+  SortOrder?: 'asc' | 'desc'
 }

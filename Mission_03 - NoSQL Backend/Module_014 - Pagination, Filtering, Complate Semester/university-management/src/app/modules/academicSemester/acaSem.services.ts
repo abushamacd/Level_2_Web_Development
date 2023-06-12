@@ -21,6 +21,9 @@ export const createAcaSemService = async (
 export const getAllSemestersService = async (
   payload: IPeginationOptions
 ): Promise<IAcaSem | null> => {
-  const result = await AcaSem.create(payload)
+  // eslint-disable-next-line no-console
+  console.log(payload)
+  const result = null
+  // const result = await AcaSem.create(payload)
   return result
 }

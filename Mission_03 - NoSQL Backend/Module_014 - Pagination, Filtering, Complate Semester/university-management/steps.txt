@@ -458,7 +458,7 @@ install zod and configur - https://zod.dev/?id=installation
 
             export default reqValidate
 
-        create handleZodError.ts in the middleware folder paste the code
+        create handleZodError.ts in the errorFormating folder paste the code
             import { ZodError } from 'zod'
             import { IErrorResponse } from '../interface/common'
             import { IErrorMessage } from '../interface/error'

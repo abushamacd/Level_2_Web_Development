@@ -1,9 +1,12 @@
 import express from 'express'
 import reqValidate from '../../../middleware/reqValidate'
 import { acaSemZod } from './acaSem.validation'
-import { createAcaSem } from './acaSem.controller'
+import { createAcaSem, getAllSemesters } from './acaSem.controller'
 const router = express.Router()
 
-router.route('/').post(reqValidate(acaSemZod), createAcaSem)
+router
+  .route('/')
+  .post(reqValidate(acaSemZod), createAcaSem)
+  .get(getAllSemesters)
 
 export default router

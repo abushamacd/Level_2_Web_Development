@@ -3,6 +3,8 @@ import { createAcaSemService, getAllSemestersService } from './acaSem.services'
 import { tryCatch } from '../../../utilities/tryCatch'
 import { sendRes } from '../../../utilities/sendRes'
 import status from 'http-status'
+import { pick } from '../../../utilities/pick'
+import { paginationFields } from '../../../constant/pagination'
 
 export const createAcaSem = tryCatch(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -19,12 +21,7 @@ export const createAcaSem = tryCatch(
 
 export const getAllSemesters = tryCatch(
   async (req: Request, res: Response, next: NextFunction) => {
-    const paginationOptions = {
-      page: Number(req.query.page),
-      limit: Number(req.query.limit),
-      sortBy: req.query.sortBy,
-      sortOrder: req.query.sortOrder,
-    }
+    const paginationOptions = pick(req.query, paginationFields)
     const result = await getAllSemestersService(paginationOptions)
     sendRes(res, {
       statusCode: status.OK,
