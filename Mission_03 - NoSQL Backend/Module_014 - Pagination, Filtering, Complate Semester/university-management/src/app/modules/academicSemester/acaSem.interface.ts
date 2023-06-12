@@ -19,7 +19,7 @@ export type IAcaSemCodes = '01' | '02' | '03'
 
 export type IAcaSem = {
   title: IAcaSemTitles
-  year: number
+  year: string
   code: IAcaSemCodes
   startMonth: IAcaSemMonths
   endMonth: IAcaSemMonths

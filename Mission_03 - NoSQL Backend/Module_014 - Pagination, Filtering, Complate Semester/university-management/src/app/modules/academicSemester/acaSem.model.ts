@@ -13,7 +13,7 @@ const acaSemSchema = new Schema<IAcaSem>(
       enum: acaSemTitles,
     },
     year: {
-      type: Number,
+      type: String,
       required: true,
     },
     code: {

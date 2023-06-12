@@ -24,7 +24,21 @@ export const getAllSemestersService = async (
   filters: IAcaSemFilters,
   payload: IPeginationOptions
 ) => {
+  const { searchTerm } = filters
   const { page, limit, skip, sortOrder, sortBy } = pageCalculate(payload)
+  const acaSemSearchFields = ['title', 'code', 'year']
+  const searchConditions = []
+
+  if (searchTerm) {
+    searchConditions.push({
+      $or: acaSemSearchFields.map(field => ({
+        [field]: {
+          $regex: searchTerm,
+          $options: 'i',
+        },
+      })),
+    })
+  }
 
   const sortConditions: { [key: string]: SortOrder } = {}
 
@@ -35,7 +49,7 @@ export const getAllSemestersService = async (
   // eslint-disable-next-line no-console
   // console.log(sortConditions)
 
-  const result = await AcaSem.find()
+  const result = await AcaSem.find({ $and: searchConditions })
     .sort(sortConditions)
     .skip(skip)
     .limit(limit)
