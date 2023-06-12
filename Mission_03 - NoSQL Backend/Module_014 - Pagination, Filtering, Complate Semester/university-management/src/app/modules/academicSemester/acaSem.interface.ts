@@ -26,7 +26,7 @@ export type IAcaSem = {
 }
 
 export type IAcaSemFilters = {
-  searchTerm: string
+  searchTerm?: string
 }
 
 export type AcaSemModel = Model<IAcaSem, Record<string, unknown>>

@@ -1,5 +1,6 @@
 import { ApiError } from '../../../errorFormating/apiError'
 import { pageCalculate } from '../../../helpers/paginationHelper'
+import { IGenericRes } from '../../../interface/genericRes'
 import { IPeginationOptions } from '../../../interface/pagination'
 import { acaSemSearchFields, acaSemTitleCodeMapper } from './acaSem.contant'
 import { IAcaSem, IAcaSemFilters } from './acaSem.interface'
@@ -23,7 +24,8 @@ export const createAcaSemService = async (
 export const getAllSemestersService = async (
   filters: IAcaSemFilters,
   payload: IPeginationOptions
-) => {
+): Promise<IGenericRes<IAcaSem[]>> => {
+  // ) => {
   const { searchTerm, ...filtersData } = filters
   const { page, limit, skip, sortOrder, sortBy } = pageCalculate(payload)
 
@@ -57,7 +59,10 @@ export const getAllSemestersService = async (
   // eslint-disable-next-line no-console
   // console.log(sortConditions)
 
-  const result = await AcaSem.find({ $and: searchConditions })
+  const filterConditions =
+    searchConditions.length > 0 ? { $and: searchConditions } : {}
+
+  const result = await AcaSem.find(filterConditions)
     .sort(sortConditions)
     .skip(skip)
     .limit(limit)
@@ -70,4 +75,11 @@ export const getAllSemestersService = async (
     },
     data: result,
   }
+}
+
+export const getSingleSemesterService = async (
+  id: string
+): Promise<IAcaSem | null> => {
+  const result = await AcaSem.findById(id)
+  return result
 }
