@@ -88,6 +88,13 @@ export const updateSemesterServices = async (
   id: string,
   payload: Partial<IAcaSem>
 ) => {
+  if (
+    payload.title &&
+    payload.code &&
+    acaSemTitleCodeMapper[payload.title] !== payload.code
+  ) {
+    throw new ApiError(status.BAD_REQUEST, 'Invalied Semester Code')
+  }
   const result = await AcaSem.findOneAndUpdate({ _id: id }, payload, {
     new: true,
   })

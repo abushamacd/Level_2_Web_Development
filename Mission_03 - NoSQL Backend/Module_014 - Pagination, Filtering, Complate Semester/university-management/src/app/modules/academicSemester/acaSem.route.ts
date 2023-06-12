@@ -1,6 +1,6 @@
 import express from 'express'
 import reqValidate from '../../../middleware/reqValidate'
-import { acaSemZod } from './acaSem.validation'
+import { createAcaSemZod, updateAcaSemZod } from './acaSem.validation'
 import {
   createAcaSem,
   getAllSemesters,
@@ -9,11 +9,14 @@ import {
 } from './acaSem.controller'
 const router = express.Router()
 
-router.route('/:id').get(getSingleSemester).patch(updateAcaSem)
+router
+  .route('/:id')
+  .get(getSingleSemester)
+  .patch(reqValidate(updateAcaSemZod), updateAcaSem)
 
 router
   .route('/')
-  .post(reqValidate(acaSemZod), createAcaSem)
+  .post(reqValidate(createAcaSemZod), createAcaSem)
   .get(getAllSemesters)
 
 export default router
