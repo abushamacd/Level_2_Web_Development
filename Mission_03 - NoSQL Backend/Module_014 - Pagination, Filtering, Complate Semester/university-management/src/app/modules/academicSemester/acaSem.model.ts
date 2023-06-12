@@ -35,6 +35,9 @@ const acaSemSchema = new Schema<IAcaSem>(
   },
   {
     timestamps: true,
+    toJSON: {
+      virtuals: true,
+    },
   }
 )
 

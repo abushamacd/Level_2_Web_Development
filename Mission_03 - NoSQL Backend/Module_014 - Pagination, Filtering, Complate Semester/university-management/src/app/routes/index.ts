@@ -3,6 +3,7 @@ const router = express.Router()
 import userRoute from '../modules/users/user.route'
 import acaSemRoute from '../modules/academicSemester/acaSem.route'
 import acaFacRoute from '../modules/academicFaculty/acaFac.route'
+import acaDepRoute from '../modules/academicDepartment/acaDep.route'
 
 const appRoutes = [
   {
@@ -10,12 +11,16 @@ const appRoutes = [
     route: userRoute,
   },
   {
-    path: '/acasem',
+    path: '/acaSem',
     route: acaSemRoute,
   },
   {
     path: '/acaFac',
     route: acaFacRoute,
+  },
+  {
+    path: '/acaDep',
+    route: acaDepRoute,
   },
 ]
 
