@@ -3,6 +3,7 @@ import {
   createAcaSemService,
   getAllSemestersService,
   getSingleSemesterService,
+  updateSemesterServices,
 } from './acaSem.services'
 import { tryCatch } from '../../../utilities/tryCatch'
 import { sendRes } from '../../../utilities/sendRes'
@@ -48,7 +49,22 @@ export const getSingleSemester = tryCatch(
     sendRes<IAcaSem>(res, {
       statusCode: status.OK,
       success: true,
-      message: 'Academic Semester successfully',
+      message: 'Semester get successfully',
+      result: result,
+    })
+    next()
+  }
+)
+
+export const updateAcaSem = tryCatch(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params
+    const reqData = req.body
+    const result = await updateSemesterServices(id, reqData)
+    sendRes<IAcaSem>(res, {
+      statusCode: status.OK,
+      success: true,
+      message: 'Semester update successfully',
       result: result,
     })
     next()

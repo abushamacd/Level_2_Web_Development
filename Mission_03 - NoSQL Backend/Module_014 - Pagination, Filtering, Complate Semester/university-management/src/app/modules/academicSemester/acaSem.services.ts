@@ -83,3 +83,13 @@ export const getSingleSemesterService = async (
   const result = await AcaSem.findById(id)
   return result
 }
+
+export const updateSemesterServices = async (
+  id: string,
+  payload: Partial<IAcaSem>
+) => {
+  const result = await AcaSem.findOneAndUpdate({ _id: id }, payload, {
+    new: true,
+  })
+  return result
+}

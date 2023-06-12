@@ -5,10 +5,11 @@ import {
   createAcaSem,
   getAllSemesters,
   getSingleSemester,
+  updateAcaSem,
 } from './acaSem.controller'
 const router = express.Router()
 
-router.route('/:id').get(getSingleSemester)
+router.route('/:id').get(getSingleSemester).patch(updateAcaSem)
 
 router
   .route('/')
