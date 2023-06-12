@@ -8,6 +8,7 @@ import { ApiError } from '../errorFormating/apiError'
 import { errorLogger } from '../utilities/logger'
 import { ZodError } from 'zod'
 import { handleZodError } from '../errorFormating/handleZodError'
+import { handleCastError } from '../errorFormating/handleCastError'
 
 export const globarError: ErrorRequestHandler = (error, req, res, next) => {
   let statusCode = 400
@@ -22,6 +23,11 @@ export const globarError: ErrorRequestHandler = (error, req, res, next) => {
   //
   if (error?.name === 'ValidationError') {
     const simplifiedError = handleValidationError(error)
+    statusCode = simplifiedError.statusCode
+    message = simplifiedError.message
+    errorMessage = simplifiedError.errorMessage
+  } else if (error?.name === 'CastError') {
+    const simplifiedError = handleCastError(error)
     statusCode = simplifiedError.statusCode
     message = simplifiedError.message
     errorMessage = simplifiedError.errorMessage
