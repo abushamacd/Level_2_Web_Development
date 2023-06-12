@@ -6,6 +6,7 @@ import status from 'http-status'
 import { pick } from '../../../utilities/pick'
 import { paginationFields } from '../../../constant/pagination'
 import { IAcaSem } from './acaSem.interface'
+import { acaSemFilterFields } from './acaSem.contant'
 
 export const createAcaSem = tryCatch(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -24,7 +25,7 @@ export const getAllSemesters = tryCatch(
   async (req: Request, res: Response, next: NextFunction) => {
     // eslint-disable-next-line no-console
     console.log(req.query)
-    const filters = pick(req.query, ['searchTerm'])
+    const filters = pick(req.query, acaSemFilterFields)
     const paginationOptions = pick(req.query, paginationFields)
     const result = await getAllSemestersService(filters, paginationOptions)
     sendRes<IAcaSem[]>(res, {

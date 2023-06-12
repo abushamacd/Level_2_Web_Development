@@ -1,7 +1,7 @@
 import { ApiError } from '../../../errorFormating/apiError'
 import { pageCalculate } from '../../../helpers/paginationHelper'
 import { IPeginationOptions } from '../../../interface/pagination'
-import { acaSemTitleCodeMapper } from './acaSem.contant'
+import { acaSemSearchFields, acaSemTitleCodeMapper } from './acaSem.contant'
 import { IAcaSem, IAcaSemFilters } from './acaSem.interface'
 import { AcaSem } from './acaSem.model'
 import status from 'http-status'
@@ -24,9 +24,9 @@ export const getAllSemestersService = async (
   filters: IAcaSemFilters,
   payload: IPeginationOptions
 ) => {
-  const { searchTerm } = filters
+  const { searchTerm, ...filtersData } = filters
   const { page, limit, skip, sortOrder, sortBy } = pageCalculate(payload)
-  const acaSemSearchFields = ['title', 'code', 'year']
+
   const searchConditions = []
 
   if (searchTerm) {
@@ -36,6 +36,14 @@ export const getAllSemestersService = async (
           $regex: searchTerm,
           $options: 'i',
         },
+      })),
+    })
+  }
+
+  if (Object.keys(filtersData).length) {
+    searchConditions.push({
+      $and: Object.entries(filtersData).map(([field, value]) => ({
+        [field]: value,
       })),
     })
   }

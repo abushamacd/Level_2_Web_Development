@@ -26,3 +26,6 @@ export const acaSemTitleCodeMapper: {
   Summer: '02',
   Fall: '03',
 }
+
+export const acaSemSearchFields = ['title', 'code', 'year']
+export const acaSemFilterFields = ['searchTerm', 'title', 'code', 'year']
