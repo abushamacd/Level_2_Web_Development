@@ -22,6 +22,8 @@ export const createAcaSem = tryCatch(
 
 export const getAllSemesters = tryCatch(
   async (req: Request, res: Response, next: NextFunction) => {
+    // eslint-disable-next-line no-console
+    console.log(req.query)
     const paginationOptions = pick(req.query, paginationFields)
     const result = await getAllSemestersService(paginationOptions)
     sendRes<IAcaSem[]>(res, {
