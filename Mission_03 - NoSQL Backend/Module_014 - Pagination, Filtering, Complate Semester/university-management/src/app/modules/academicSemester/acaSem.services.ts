@@ -1,4 +1,5 @@
 import { ApiError } from '../../../errorFormating/apiError'
+import { IGenericRes } from '../../../interface/genericRes'
 import { IPeginationOptions } from '../../../interface/pagination'
 import { acaSemTitleCodeMapper } from './acaSem.contant'
 import { IAcaSem } from './acaSem.interface'
@@ -20,10 +21,18 @@ export const createAcaSemService = async (
 
 export const getAllSemestersService = async (
   payload: IPeginationOptions
-): Promise<IAcaSem | null> => {
-  // eslint-disable-next-line no-console
-  console.log(payload)
-  const result = null
-  // const result = await AcaSem.create(payload)
-  return result
+): Promise<IGenericRes<IAcaSem[] | null>> => {
+  const { page = 0, limit = 0 } = payload
+  const skip = (page - 1) * limit
+  const result = await AcaSem.find().sort().skip(skip).limit(limit)
+  // const result = await AcaSem.find()
+  const total = await AcaSem.countDocuments()
+  return {
+    meta: {
+      page,
+      limit,
+      total,
+    },
+    data: result,
+  }
 }
