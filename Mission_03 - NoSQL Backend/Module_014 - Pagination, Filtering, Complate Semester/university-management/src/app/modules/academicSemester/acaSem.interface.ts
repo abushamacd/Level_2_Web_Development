@@ -25,4 +25,8 @@ export type IAcaSem = {
   endMonth: IAcaSemMonths
 }
 
+export type IAcaSemFilters = {
+  searchTerm: string
+}
+
 export type AcaSemModel = Model<IAcaSem, Record<string, unknown>>

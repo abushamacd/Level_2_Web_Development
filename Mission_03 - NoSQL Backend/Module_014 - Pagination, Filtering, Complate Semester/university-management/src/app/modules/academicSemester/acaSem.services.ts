@@ -1,9 +1,8 @@
 import { ApiError } from '../../../errorFormating/apiError'
 import { pageCalculate } from '../../../helpers/paginationHelper'
-import { IGenericRes } from '../../../interface/genericRes'
 import { IPeginationOptions } from '../../../interface/pagination'
 import { acaSemTitleCodeMapper } from './acaSem.contant'
-import { IAcaSem } from './acaSem.interface'
+import { IAcaSem, IAcaSemFilters } from './acaSem.interface'
 import { AcaSem } from './acaSem.model'
 import status from 'http-status'
 import { SortOrder } from 'mongoose'
@@ -22,8 +21,9 @@ export const createAcaSemService = async (
 }
 
 export const getAllSemestersService = async (
+  filters: IAcaSemFilters,
   payload: IPeginationOptions
-): Promise<IGenericRes<IAcaSem[] | null>> => {
+) => {
   const { page, limit, skip, sortOrder, sortBy } = pageCalculate(payload)
 
   const sortConditions: { [key: string]: SortOrder } = {}
