@@ -1,11 +1,11 @@
 import config from '../../../config'
 import { IUser } from './user.interface'
 import { User } from './user.model'
-import { generateUserId } from './user.utils'
+import { generateStudentId } from './user.utils'
 
 export const createUserService = async (data: IUser): Promise<IUser | null> => {
   // generated ID
-  const id = await generateUserId()
+  const id = await generateStudentId()
   data.id = id
   // default password
   if (!data.password) {
