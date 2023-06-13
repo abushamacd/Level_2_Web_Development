@@ -1,5 +1,6 @@
-import { Schema } from 'mongoose'
-import { IStudent } from './student.interface'
+import { Schema, model } from 'mongoose'
+import { IStudent, StudentModel } from './student.interface'
+import { bloodGroup, gender } from './student.constant'
 
 export const StudentSchema = new Schema<IStudent, StudentModel>(
   {
