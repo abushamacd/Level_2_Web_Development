@@ -1,49 +1,41 @@
-import express, { Application, Request, Response, NextFunction } from 'express'
-import cors from 'cors'
+import cors from 'cors';
+import express, { Application, NextFunction, Request, Response } from 'express';
+import httpStatus from 'http-status';
+import globalErrorHandler from './app/middlewares/globalErrorHandler';
+import routes from './app/routes';
+const app: Application = express();
 
-import { globarError } from './middleware/globalError'
-import routers from './app/routes'
-import status from 'http-status'
-const app: Application = express()
+app.use(cors());
 
-// Middleware
-app.use(cors())
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+//parser
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// Data API
-app.use('/api/v1', routers)
+// app.use('/api/v1/users/', UserRoutes);
+// app.use('/api/v1/academic-semesters', AcademicSemesterRoutes);
+app.use('/api/v1', routes);
 
-// Testing API
-app.get('/', (req: Request, res: Response, next: NextFunction) => {
-  res.send('+++ App Running Successfully +++')
-  next()
-  // Uncought Error
-  // console.log(x)
-  // Test Error
-  // throw new Error('General Error')
-  // Test API Error
-  // throw new ApiError(403, 'API Error')
-  // Promiss rejection
-  // Promise.reject(new Error(`Unhandle Promiss Rejection`))
-})
+//Testing
+// app.get('/', async (req: Request, res: Response, next: NextFunction) => {
+//   throw new Error('Testing Error logger')
+// })
 
-// Global error handle
-app.use(globarError)
+//global error handler
+app.use(globalErrorHandler);
 
-// Unknown API Handle
+//handle not found
 app.use((req: Request, res: Response, next: NextFunction) => {
-  res.status(status.NOT_FOUND).json({
+  res.status(httpStatus.NOT_FOUND).json({
     success: false,
     message: 'Not Found',
-    errorMessage: [
+    errorMessages: [
       {
         path: req.originalUrl,
         message: 'API Not Found',
       },
     ],
-  })
-  next()
-})
+  });
+  next();
+});
 
-export default app
+export default app;

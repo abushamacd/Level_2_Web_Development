@@ -1,6 +1,6 @@
-import { Schema, model } from 'mongoose'
-import { IStudent, StudentModel } from './student.interface'
-import { bloodGroup, gender } from './student.constant'
+import { Schema, model } from 'mongoose';
+import { bloodGroup, gender } from './student.constant';
+import { IStudent, StudentModel } from './student.interface';
 
 export const StudentSchema = new Schema<IStudent, StudentModel>(
   {
@@ -115,17 +115,17 @@ export const StudentSchema = new Schema<IStudent, StudentModel>(
     },
     academicFaculty: {
       type: Schema.Types.ObjectId,
-      ref: 'Academic_Faculty',
+      ref: 'AcademicFaculty',
       required: true,
     },
     academicDepartment: {
       type: Schema.Types.ObjectId,
-      ref: 'Academic_Department',
+      ref: 'AcademicDepartment',
       required: true,
     },
     academicSemester: {
       type: Schema.Types.ObjectId, // academicSemester --> _id
-      ref: 'Academic_Semester',
+      ref: 'AcademicSemester',
       required: true,
     },
     profileImage: {
@@ -139,6 +139,6 @@ export const StudentSchema = new Schema<IStudent, StudentModel>(
       virtuals: true,
     },
   }
-)
+);
 
-export const Student = model<IStudent, StudentModel>('Student', StudentSchema)
+export const Student = model<IStudent, StudentModel>('Student', StudentSchema);
