@@ -2,13 +2,16 @@ import { IAcaSem } from '../academicSemester/acaSem.interface'
 import { User } from './user.model'
 
 export const findLastStudentId = async (): Promise<string | undefined> => {
-  const lastStudent = await User.findOne({}, { id: true, _id: false })
+  const lastStudent = await User.findOne(
+    { role: 'student' },
+    { id: true, _id: false }
+  )
     .sort({
       createdAt: -1,
     })
     .lean()
 
-  return lastStudent?.id
+  return lastStudent?.id ? lastStudent.id.substring(4) : undefined
 }
 
 export const generateStudentId = async (
@@ -23,13 +26,16 @@ export const generateStudentId = async (
 }
 
 export const findLastFacultyId = async (): Promise<string | undefined> => {
-  const lastFaculty = await User.findOne({}, { id: true, _id: false })
+  const lastFaculty = await User.findOne(
+    { role: 'faculty' },
+    { id: true, _id: false }
+  )
     .sort({
       createdAt: -1,
     })
     .lean()
 
-  return lastFaculty?.id
+  return lastFaculty?.id ? lastFaculty.id.substring(2) : undefined
 }
 
 export const generateFacultyId = async (): Promise<string> => {
