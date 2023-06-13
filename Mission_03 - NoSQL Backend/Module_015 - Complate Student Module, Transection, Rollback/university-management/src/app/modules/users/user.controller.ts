@@ -1,11 +1,12 @@
 import { Request, Response } from 'express'
-import { createUserService } from './user.services'
+import { createStudentService } from './user.services'
 import { tryCatch } from '../../../utilities/tryCatch'
 import { sendRes } from '../../../utilities/sendRes'
 import status from 'http-status'
 
-export const createUser = tryCatch(async (req: Request, res: Response) => {
-  const result = await createUserService(req.body)
+export const createStudent = tryCatch(async (req: Request, res: Response) => {
+  const { student, ...userData } = req.body
+  const result = await createStudentService(student, userData)
   sendRes(res, {
     statusCode: status.OK,
     success: true,

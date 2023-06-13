@@ -1,17 +1,29 @@
 import config from '../../../config'
+import { AcaSem } from '../academicSemester/acaSem.model'
+import { IStudent } from '../student/student.interface'
 import { IUser } from './user.interface'
 import { User } from './user.model'
 import { generateStudentId } from './user.utils'
 
-export const createUserService = async (data: IUser): Promise<IUser | null> => {
-  // generated ID
-  const id = await generateStudentId()
-  data.id = id
+export const createStudentService = async (
+  student: IStudent,
+  user: IUser
+): Promise<IUser | null> => {
   // default password
-  if (!data.password) {
-    data.password = config.user_default_pass as string
+  if (!user.password) {
+    user.password = config.student_default_pass as string
   }
-  const result = await User.create(data)
+  // set role
+  user.role = 'student'
+
+  const academicsemester = await AcaSem.findById(student.academicSemester)
+
+  const id = await generateStudentId(academicsemester)
+  user.id = id
+  student.id = id
+
+  //
+  const result = await User.create(user)
   if (!result) {
     throw new Error('User create failed')
   }
