@@ -15,6 +15,9 @@ export const generateStudentId = async (
   academicSemester: IAcaSem
 ): Promise<string> => {
   const currentId = (await findLastUserId()) || String(0).padStart(5, '0')
-  const incrementId = String(parseInt(currentId) + 1).padStart(5, '0')
+  let incrementId = String(parseInt(currentId) + 1).padStart(5, '0')
+  incrementId = `${academicSemester.year.substring(2)}${
+    academicSemester.code
+  }${incrementId}`
   return incrementId
 }
