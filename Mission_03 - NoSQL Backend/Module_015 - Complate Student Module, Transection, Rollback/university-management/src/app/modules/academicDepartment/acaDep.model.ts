@@ -10,7 +10,7 @@ const AcaDepSchema = new Schema<IAcaDep, AcaDepModel>(
     },
     academicFaculty: {
       type: Schema.Types.ObjectId,
-      ref: 'academic_faculty',
+      ref: 'Academic_Faculty',
       required: true,
     },
   },
@@ -23,6 +23,6 @@ const AcaDepSchema = new Schema<IAcaDep, AcaDepModel>(
 )
 
 export const AcaDep = model<IAcaDep, AcaDepModel>(
-  'academic_department',
+  'Academic_Department',
   AcaDepSchema
 )

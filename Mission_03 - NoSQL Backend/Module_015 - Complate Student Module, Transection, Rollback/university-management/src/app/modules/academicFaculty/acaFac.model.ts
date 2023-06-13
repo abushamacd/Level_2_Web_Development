@@ -18,6 +18,6 @@ const AcaFacSchema = new Schema<IAcaFac, AcaFacModel>(
 )
 
 export const AcaFac = model<IAcaFac, AcaFacModel>(
-  'academic_faculty',
+  'Academic_Faculty',
   AcaFacSchema
 )
