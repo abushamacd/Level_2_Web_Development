@@ -1,8 +1,6 @@
 import httpStatus from 'http-status';
-import { Secret } from 'jsonwebtoken';
 import config from '../../../config';
 import ApiError from '../../../errors/ApiError';
-import { jwtHelpers } from '../../../helpers/jwtHelpers';
 import { User } from '../user/user.model';
 import {
   ILoginUser,
@@ -12,10 +10,6 @@ import {
 
 const loginUser = async (payload: ILoginUser): Promise<ILoginUserResponse> => {
   const { id, password } = payload;
-  // creating instance of User
-  // const user = new User();
-  //  // access to our instance methods
-  //   const isUserExist = await user.isUserExist(id);
 
   const isUserExist = await User.isUserExist(id);
 
