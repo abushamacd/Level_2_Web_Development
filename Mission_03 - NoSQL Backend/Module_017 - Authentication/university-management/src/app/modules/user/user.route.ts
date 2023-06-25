@@ -9,6 +9,7 @@ const router = express.Router();
 router.post(
   '/create-student',
   validateRequest(StudentValidaion.createUserZodSchema),
+  // auth(),
   UserController.createStudent
 );
 router.post(
