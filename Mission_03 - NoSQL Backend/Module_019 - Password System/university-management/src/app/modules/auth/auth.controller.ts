@@ -55,7 +55,7 @@ const refreshToken = catchAsync(async (req: Request, res: Response) => {
 
 const changePassword = catchAsync(async (req: Request, res: Response) => {
   const { ...passwordData } = req.body;
-  const result = await AuthService.changePassword(
+  await AuthService.changePassword(
     passwordData,
     req.user as IVerifiedLoginUser
   );
@@ -63,8 +63,7 @@ const changePassword = catchAsync(async (req: Request, res: Response) => {
   sendResponse<IRefreshTokenResponse>(res, {
     statusCode: 200,
     success: true,
-    message: 'Password change successfully !',
-    data: result,
+    message: 'Password changed successfully !',
   });
 });
 

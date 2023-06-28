@@ -90,7 +90,8 @@ const refreshToken = async (token: string): Promise<IRefreshTokenResponse> => {
 const changePassword = async (
   payload: IChangePassword,
   user: IVerifiedLoginUser
-): Promise<ILoginUserResponse> => {
+): Promise<void> => {
+  console.log(user);
   const { oldPassword, newPassword } = payload;
   const { userId } = user;
 
@@ -116,6 +117,7 @@ const changePassword = async (
   const updatedData = {
     password: newHashedPassword,
     needsPasswordChange: false,
+    passwordChangedAt: new Date(),
   };
 
   await User.findOneAndUpdate({ id: userId }, updatedData);
