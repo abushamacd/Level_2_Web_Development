@@ -91,7 +91,6 @@ const changePassword = async (
   payload: IChangePassword,
   user: IVerifiedLoginUser
 ): Promise<void> => {
-  console.log(user);
   const { oldPassword, newPassword } = payload;
   const { userId } = user;
 
