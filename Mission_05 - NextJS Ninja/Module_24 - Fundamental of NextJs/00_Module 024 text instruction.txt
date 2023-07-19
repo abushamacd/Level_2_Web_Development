@@ -1,0 +1,41 @@
+তোমার প্রথম প্রেম জাভাস্ক্রিপ্ট। দ্বিতীয় প্রেম React আর তৃতীয় প্রেম হলো Next.Js !!! (মডিউল 24)
+
+#module_release
+
+#mission_be_a_nextjs_ninja
+
+#module_24  
+
+
+
+আজকে তোমার জন্য স্বরনীয় দিন। আজকে থেকে তুমি তোমার জীবনের নতুন দিগন্ত শুরু করতে যাচ্ছ। খুবই এক্সসাইটিং আর খুবই ইন্টারেস্টিং এই জার্নি হবে তোমার। এই মডিউল দিয়েই শুরু হচ্ছে Next.Js Ninja হওয়ার মিশনInstall Next.Js: নিচে তিনটা কমান্ড দিয়ে দিলাম কি আছে জীবনে।
+
+
+
+npx create-next-app@latest my-next-app  
+
+cd my-next-app  
+
+npm run dev  
+
+
+
+আজকের মডিউল:   খুবই গুরুত্বপূর্ণ কিছু কথাবার্তা হবে আজকের মডিউলে। জাস্ট ১০টা-১১টা ভিডিও।  এর মধ্যে থাকবে--  ১. Next.Js কি? ২. React এর পরিবর্তে কেন Next.Js ব্যবহার করবো? ৩. ক্লায়েন্ট সাইড, সার্ভার সাইড, pre-rendering কি?৪. Next.Js এর key ফিচারস গুলো নিয়ে আলোচনা করবো।  ৫. আর! নো নো সব যদি এখানেই বলে দেয়ই তাহলে তো ভিডিও দেখার মজাই নস্ট হয়ে গেলো সো জলদি শুরু করে দাও
+
+
+
+তোমার এই মিশন মিশন ৫ এর টেনটেটিভ আউটলাইনঃ   
+
+18th July, Tuesday: Module-24: Fundamentals of Next.Js 
+
+20th July, Thursday: Module-25: Next Level Data Fetching in Next.Js
+
+23rd July, Sunday: Module-26: Explore NextAuth & App Router
+
+25th July, Tuesday: Module-26.5: Practice Day  
+
+27th July, Thursday: Module-27: Assignment-6
+
+
+
+শুরু হলো, এ রোমান্টিক রিলেশন উইথ Next.Js  লেগে থাকলে কত কি যে হবে!! এখানেই নয় তো শেষ!
