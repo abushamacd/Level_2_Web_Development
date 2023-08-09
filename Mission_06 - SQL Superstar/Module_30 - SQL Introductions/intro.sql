@@ -64,4 +64,36 @@ SELECT * FROM users;
 
 -- ## DELETE all data from table
 
-TRUNCATE TABLE users 
+TRUNCATE TABLE users;
+
+-- add column into TABLE
+
+ALTER TABLE users ADD COLUMN password VARCHAR(255) NOT NULL;
+
+-- ## DELETE COLUMN
+
+ALTER TABLE users DROP COLUMN age;
+
+-- change data TYPES
+
+ALTER TABLE users ALTER COLUMN phone type VARCHAR(11);
+
+-- set DEFAULT value of a COLUMN
+
+ALTER TABLE users ALTER COLUMN password SET DEFAULT 'user@123';
+
+-- remove DEFAULT value of a COLUMN
+
+ALTER TABLE users ALTER COLUMN password DROP DEFAULT;
+
+-- rename COLUMN
+
+ALTER TABLE users RENAME COLUMN phone to mobile;
+
+-- add CONSTRAINTS
+
+ALTER Table users alter COLUMN mobile set NOT NULL;
+
+-- drop CONSTRAINTS
+
+ALTER Table users alter COLUMN mobile DROP NOT NULL;
