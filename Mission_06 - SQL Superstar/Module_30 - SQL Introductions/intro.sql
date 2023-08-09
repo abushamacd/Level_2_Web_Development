@@ -12,3 +12,22 @@
 
 -- ## delete TABLE
 -- DROP TABLE "users"
+
+-- ## CREATE a TABLE with CONSTRAINTS
+CREATE TABLE users (
+    user_id SERIAL PRIMARY KEY,
+    email VARCHAR(50) NOT NULL UNIQUE,
+    phone VARCHAR(15) NOT NULL UNIQUE,
+    age int DEFAULT 18
+);
+
+
+-- ## insert data
+INSERT INTO users VALUES (
+    1,
+    'abc@gmail.com', 
+    '904580148'
+);
+
+-- ## selete all data from a table
+  SELECT * FROM users;
