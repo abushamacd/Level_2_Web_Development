@@ -1,0 +1,2 @@
+Do practice and be a SQL Super Star:
+https://github.com/Apollo-Level2-Web-Dev/postgresSQL-practice-task
