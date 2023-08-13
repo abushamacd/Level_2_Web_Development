@@ -115,3 +115,49 @@ CREATE TABLE
         departId INT,
         CONSTRAINT fk_dept FOREIGN KEY (departId) REFERENCES Department(deptId)
     );
+
+CREATE TABLE
+    Courses (
+        courseId SERIAL PRIMARY KEY,
+        courseName VARCHAR(255) NOT NULL,
+        description VARCHAR(255),
+        publishDate DATE
+    );
+
+INSERT INTO
+    Courses(
+        courseName,
+        description,
+        publishDate
+    )
+VALUES (
+        'Introduction to Programming',
+        'Learn the basics of programming.',
+        '2022-01-15'
+    ), (
+        'Database Management',
+        'Explore the world of database systems.',
+        '2022-03-10'
+    ), (
+        'Web Development Fundamentals',
+        'Build dynamic websites and web applications.',
+        '2022-05-20'
+    ), (
+        'Machine Learning Essentials',
+        'Discover the fundamentals of machine learning.',
+        '2022-07-30'
+    ), (
+        'Advanced Data Analysis',
+        'Deepen your data analysis skills.',
+        '2022-09-18'
+    );
+
+SELECT * FROM Courses;
+
+-- update database table row
+
+UPDATE courses set coursename = 'Intro' WHERE courseid=1;
+
+-- detele row
+
+DELETE FROM courses WHERE courseid = 5 
