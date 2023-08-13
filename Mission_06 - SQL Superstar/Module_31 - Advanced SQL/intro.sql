@@ -160,4 +160,16 @@ UPDATE courses set coursename = 'Intro' WHERE courseid=1;
 
 -- detele row
 
-DELETE FROM courses WHERE courseid = 5 
+DELETE FROM courses WHERE courseid = 5;
+
+-- selete all fields from a row
+
+SELECT coursename from courses;
+
+-- DISTINCT - hide the duplicate value
+
+SELECT DISTINCT coursename from courses;
+
+-- filtering
+
+SELECT * from courses WHERE coursename='Intro' AND courseid>2;
