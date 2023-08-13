@@ -211,3 +211,11 @@ SELECT
     d.deptname
 FROM employee e
     INNER JOIN department d ON d.deptid = e.departid;
+
+-- aggregate FUNCTION
+
+SELECT e.deptid, AVG(e.salary)
+from employee e
+    FULL JOIN department d ON e.deptid = d.departid
+GROUP BY deptid
+HAVING avg(e.salary) > 40000;
