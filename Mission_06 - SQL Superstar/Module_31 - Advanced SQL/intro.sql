@@ -182,3 +182,19 @@ WHERE courseid > 2
 ORDER BY coursename ASC
 LIMIT 3
 OFFSET 2;
+
+-- in
+
+SELECT * from courses WHERE courseid IN (2,4,6);
+
+-- not in
+
+SELECT * from courses WHERE courseid NOT IN (2,4,6);
+
+-- between
+
+SELECT * from courses WHERE courseid BETWEEN 2 AND 4;
+
+-- like
+
+SELECT * from courses WHERE coursename LIKE '%Int%';
