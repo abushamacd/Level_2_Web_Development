@@ -173,3 +173,12 @@ SELECT DISTINCT coursename from courses;
 -- filtering
 
 SELECT * from courses WHERE coursename='Intro' AND courseid>2;
+
+-- ordering
+
+SELECT *
+from courses
+WHERE courseid > 2
+ORDER BY coursename ASC
+LIMIT 3
+OFFSET 2;
