@@ -198,3 +198,16 @@ SELECT * from courses WHERE courseid BETWEEN 2 AND 4;
 -- like
 
 SELECT * from courses WHERE coursename LIKE '%Int%';
+
+-- INSERT INTO employee VALUES(5,'Jabed',4);
+
+-- SELECT * from employee
+
+-- joining
+
+SELECT
+    e.empid,
+    e.empname,
+    d.deptname
+FROM employee e
+    INNER JOIN department d ON d.deptid = e.departid;
