@@ -7,7 +7,7 @@ async function main() {
     data: {
       email: "Shabbir@gmail.com",
       name: "Shabbir",
-      age: 23,
+      role: "user",
     },
   });
   console.log(user);
