@@ -67,7 +67,7 @@ export const getPostService = async (id: number): Promise<Post | null> => {
 
 export const updatePostService = async (
   id: number,
-  data: Post
+  data: Partial<Post>
 ): Promise<Post | null> => {
   const result = await prisma.post.update({
     where: {
@@ -78,6 +78,20 @@ export const updatePostService = async (
 
   if (!result) {
     throw new Error(`Post udpate failed`)
+  }
+
+  return result
+}
+
+export const deletePostService = async (id: number): Promise<Post | null> => {
+  const result = await prisma.post.delete({
+    where: {
+      id,
+    },
+  })
+
+  if (!result) {
+    throw new Error(`Post delete failed`)
   }
 
   return result

@@ -4,6 +4,7 @@ import { tryCatch } from '../../../utilities/tryCatch'
 import httpStatus from 'http-status'
 import {
   createPostService,
+  deletePostService,
   getPostService,
   getPostsService,
   updatePostService,
@@ -53,6 +54,16 @@ export const updatePost = tryCatch(async (req: Request, res: Response) => {
     statusCode: httpStatus.OK,
     success: true,
     message: 'Post update successfully',
+    data: result,
+  })
+})
+
+export const deletePost = tryCatch(async (req: Request, res: Response) => {
+  const result = await deletePostService(parseInt(req.params.id))
+  sendRes<Post>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Post delete successfully',
     data: result,
   })
 })
