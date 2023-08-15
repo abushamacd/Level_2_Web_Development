@@ -15,26 +15,13 @@ export const getPostsService = async (
   paginationOptions: IPaginationOptions,
   filters: IPostFilters
 ): Promise<Post[] | null> => {
-  const { page, limit, skip, sortBy, sortOrder } =
+  const { limit, skip, sortBy, sortOrder } =
     calculatePagination(paginationOptions)
-  const { searchTerm, ...filtersData } = filters
+  const { searchTerm } = filters
 
-  // const andConditions = []
-
-  // search on the filed
-  // if (searchTerm) {
-  //   andConditions.push({
-  //     OR: postSearchableFields.map(field => ({
-  //       [field]: {
-  //         contains: searchTerm,
-  //         mode: 'insensitive',
-  //       },
-  //     })),
-  //   })
-  // }
-
-  console.log(page, limit, skip, searchTerm, filtersData)
   const result = await prisma.post.findMany({
+    skip,
+    take: limit,
     include: {
       author: true,
       category: true,
