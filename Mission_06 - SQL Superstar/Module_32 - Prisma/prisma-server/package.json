@@ -9,8 +9,9 @@
   "scripts": {
     "start": "node dist/server.js",
     "build": "tsc",
-    "prisma": "prisma generate",
-    "dev": "prisma generate && ts-node-dev --respawn --transpile-only src/server.ts",
+    "pg": "prisma generate",
+    "pmi": "prisma migrate dev",
+    "dev": "prisma migrate dev && ts-node-dev --respawn --transpile-only src/server.ts",
     "lint:check": "eslint --ignore-path .eslintignore --ext .js,.ts .",
     "lint:fix": "eslint . --fix",
     "prettier:check": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",

@@ -18,7 +18,7 @@ export async function bootStrap() {
       )
     })
   } catch (error) {
-    console.error(`==== 🤞  Database Connection Error ====`, error)
+    errorLogger.error(`==== 🤞  Database Connection Error ====`, error)
     process.exit(1)
   }
 

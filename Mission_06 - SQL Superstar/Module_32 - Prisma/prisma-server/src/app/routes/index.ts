@@ -5,11 +5,11 @@ import dataRoute from '../modules/data/data.route'
 
 const appRoutes = [
   {
-    path: '/users',
+    path: '/user',
     route: userRoute,
   },
   {
-    path: '/datas',
+    path: '/data',
     route: dataRoute,
   },
 ]
