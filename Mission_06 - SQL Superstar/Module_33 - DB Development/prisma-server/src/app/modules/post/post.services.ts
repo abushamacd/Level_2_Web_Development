@@ -14,33 +14,41 @@ export const createPostService = async (data: Post): Promise<Post | null> => {
 export const getPostsService = async (
   paginationOptions: IPaginationOptions,
   filters: IPostFilters
-): Promise<Post[] | null> => {
-  const { limit, skip, sortBy, sortOrder } =
+): Promise<Post[] | null | any> => {
+  const { page, limit, skip, sortBy, sortOrder } =
     calculatePagination(paginationOptions)
   const { searchTerm } = filters
 
-  const result = await prisma.post.findMany({
-    skip,
-    take: limit,
-    include: {
-      author: true,
-      category: true,
-    },
-    orderBy: {
-      [sortBy]: sortOrder,
-    },
-    where: {
-      OR: [
-        { title: { contains: searchTerm, mode: 'insensitive' } },
-        { author: { name: { contains: searchTerm, mode: 'insensitive' } } },
-      ],
-    },
-  })
-  if (!result) {
-    throw new Error(`Post retrive failed`)
-  }
+  return await prisma.$transaction(async p => {
+    const result = await p.post.findMany({
+      skip,
+      take: limit,
+      include: {
+        author: true,
+        category: true,
+      },
+      orderBy: {
+        [sortBy]: sortOrder,
+      },
+      where: {
+        OR: [
+          { title: { contains: searchTerm, mode: 'insensitive' } },
+          { author: { name: { contains: searchTerm, mode: 'insensitive' } } },
+        ],
+      },
+    })
 
-  return result
+    const total = await p.post.count()
+
+    return {
+      meta: {
+        page,
+        limit,
+        total,
+      },
+      data: result,
+    }
+  })
 }
 
 export const getPostService = async (id: number): Promise<Post | null> => {

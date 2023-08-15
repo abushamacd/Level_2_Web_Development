@@ -31,8 +31,9 @@ export const getPosts = tryCatch(async (req: Request, res: Response) => {
   sendRes<Post[]>(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Post retrive successfully',
-    data: result,
+    message: 'Post retrieved successfully',
+    meta: result.meta,
+    data: result.data,
   })
 })
 
