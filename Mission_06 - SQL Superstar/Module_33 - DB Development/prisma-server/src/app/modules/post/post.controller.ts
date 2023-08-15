@@ -9,6 +9,9 @@ import {
   updatePostService,
 } from './post.services'
 import { Post } from '@prisma/client'
+import { pick } from '../../../utilities/pick'
+import { paginationFields } from '../../../constants/pagination'
+import { postFilterableFields } from './post.constant'
 
 export const createPost = tryCatch(async (req: Request, res: Response) => {
   const result = await createPostService(req.body)
@@ -21,7 +24,10 @@ export const createPost = tryCatch(async (req: Request, res: Response) => {
 })
 
 export const getPosts = tryCatch(async (req: Request, res: Response) => {
-  const result = await getPostsService()
+  const paginationOptions = pick(req.query, paginationFields)
+  const filters = pick(req.query, postFilterableFields)
+
+  const result = await getPostsService(paginationOptions, filters)
   sendRes<Post[]>(res, {
     statusCode: httpStatus.OK,
     success: true,
