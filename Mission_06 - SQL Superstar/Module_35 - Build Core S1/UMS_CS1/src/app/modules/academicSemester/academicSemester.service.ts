@@ -15,6 +15,7 @@ const insertIntoDB = async (
 
   return result;
 };
+
 export const AcademicSemesterService = {
   insertIntoDB,
 };
