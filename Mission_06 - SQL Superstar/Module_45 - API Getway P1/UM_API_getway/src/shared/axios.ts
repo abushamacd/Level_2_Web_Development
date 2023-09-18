@@ -1,4 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
+import config from '../config';
 
 const HttpService = (baseUrl: string): AxiosInstance => {
   const instance = axios.create({
@@ -29,3 +30,8 @@ const HttpService = (baseUrl: string): AxiosInstance => {
 
   return instance;
 };
+
+const AuthService = HttpService(config.auth_service_url);
+const CoreService = HttpService(config.core_service_url);
+
+export { HttpService, AuthService, CoreService };
