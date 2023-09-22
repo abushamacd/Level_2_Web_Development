@@ -20,7 +20,17 @@ const getAllFromDB = async (req: Request, res: Response, next: NextFunction) => 
   }
 };
 
+const updateOneIntoDB = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const result = await AcademicSemesterService.updateOneIntoDB(req);
+    sendResponse(res, result);
+  } catch (err) {
+    next(err);
+  }
+};
+
 export const AcademicSemesterController = {
   insertIntoDB,
-  getAllFromDB
+  getAllFromDB,
+  updateOneIntoDB
 };

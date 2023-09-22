@@ -21,7 +21,22 @@ const getAllFromDB = async (req: Request): Promise<IGenericResponse> => {
   return response;
 };
 
+const updateOneIntoDB = async (req: Request): Promise<IGenericResponse> => {
+  const { id } = req.params;
+  const response: IGenericResponse = await HttpService.patch(
+    `/academic-semesters/${id}`,
+    req.body,
+    {
+      headers: {
+        Authorization: req.headers.authorization
+      }
+    }
+  );
+  return response;
+};
+
 export const AcademicSemesterService = {
   insertIntoDB,
-  getAllFromDB
+  getAllFromDB,
+  updateOneIntoDB
 };

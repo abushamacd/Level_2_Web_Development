@@ -16,4 +16,11 @@ router.post(
   AcademicSemesterController.insertIntoDB
 );
 
+router.patch(
+  '/:id',
+  validateRequest(AcademicSemesterValidation.update),
+  auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN),
+  AcademicSemesterController.updateOneIntoDB
+);
+
 export const academicSemesterRoutes = router;
