@@ -16,7 +16,6 @@ const initAcademicSemesterEvents = () => {
   RedisClient.subscribe(EVENT_ACADEMIC_SEMESTER_UPDATED, async (e: string) => {
     const data = JSON.parse(e);
     await AcademicSemesterService.updateOneIntoDBFromEvent(data);
-    console.log(data);
   });
 };
 
