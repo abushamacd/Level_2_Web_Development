@@ -1,0 +1,23 @@
+
+#UMS_Frontend Integration using Next.Js Part-1
+
+
+
+হুররে আজকে থেকে শুরু হয়ে গেলো এক্সাইটিং University Management এর ফ্রন্টএন্ড বর্তমানের লেটেস্ট Next.Js-13.4 এর App Router দিয়ে। 
+
+
+
+মডিউলে ব্যবহৃত রিসোর্স লিংকসঃ
+
+Controlled and uncontrolled components:
+
+https://www.scaler.com/topics/controlled-and-uncontrolled-components-in-react/
+
+SVG Images: https://storyset.com/login
+
+
+
+Module Github Code link:
+
+https://github.com/Apollo-Level2-Web-Dev/university-management-frontend/tree/um-part-1
+
