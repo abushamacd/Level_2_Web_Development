@@ -2,22 +2,15 @@
 
 import { useState } from "react";
 import { Layout, Menu } from "antd";
-const { Sider } = Layout;
 import type { MenuProps } from "antd";
-import {
-  DesktopOutlined,
-  FileOutlined,
-  PieChartOutlined,
-  TeamOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
 import sidebarItems from "@/constants/sidebarItems";
 import { USER_ROLE } from "@/constants/role";
 
 type MenuItem = Required<MenuProps>["items"][number];
+const { Sider } = Layout;
 
 const Sidebar = () => {
-  const role = USER_ROLE.ADMIN;
+  const role = USER_ROLE.STUDENT;
   const [collapsed, setCollapsed] = useState(false);
   return (
     <Sider
