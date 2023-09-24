@@ -4,7 +4,7 @@ import { Layout } from "antd";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <Layout style={{ minHeight: "100vh" }}>
+    <Layout hasSider style={{ minHeight: "100vh" }}>
       <Sidebar />
       <Contents>{children}</Contents>
     </Layout>
