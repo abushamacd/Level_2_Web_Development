@@ -1,9 +1,11 @@
 import React from "react";
+import errorPage from "@/assets/404 error .png";
+import Image from "next/image";
 
 const NotFoundPage = () => {
   return (
     <div>
-      <h2> 404 ! Page not found</h2>
+      <Image src={errorPage} width={1200} alt="404 error" />
     </div>
   );
 };

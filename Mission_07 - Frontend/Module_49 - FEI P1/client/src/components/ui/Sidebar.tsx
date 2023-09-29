@@ -4,13 +4,13 @@ import { useState } from "react";
 import { Layout, Menu } from "antd";
 import type { MenuProps } from "antd";
 import sidebarItems from "@/constants/sidebarItems";
-import { USER_ROLE } from "@/constants/role";
+import { getUserInfo } from "@/service/auth.service";
 
 type MenuItem = Required<MenuProps>["items"][number];
 const { Sider } = Layout;
 
 const Sidebar = () => {
-  const role = USER_ROLE.STUDENT;
+  const { role } = getUserInfo() as any;
   const [collapsed, setCollapsed] = useState(false);
   return (
     <Sider
@@ -36,7 +36,7 @@ const Sidebar = () => {
           marginBottom: "1rem",
         }}
       >
-        PH-University
+        UMS
       </div>
       <Menu
         theme="dark"
