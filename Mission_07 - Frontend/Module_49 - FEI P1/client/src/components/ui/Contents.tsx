@@ -1,7 +1,6 @@
 "use client";
 
-import { Breadcrumb, Layout, theme } from "antd";
-import UMBreadCrumb from "./UMBreadCrumb";
+import { Layout, theme } from "antd";
 import Header from "./Header";
 
 const { Content } = Layout;
@@ -16,18 +15,6 @@ const Contents = ({ children }: { children: React.ReactNode }) => {
   return (
     <Content style={{ color: "black" }}>
       <Header />
-      <UMBreadCrumb
-        items={[
-          {
-            label: `${base}`,
-            link: `/${base}`,
-          },
-          {
-            label: "student",
-            link: `/${base}/student`,
-          },
-        ]}
-      />
       {children}
     </Content>
   );
