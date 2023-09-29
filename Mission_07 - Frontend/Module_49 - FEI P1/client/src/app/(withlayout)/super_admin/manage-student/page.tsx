@@ -17,6 +17,7 @@ const ManageStudent = () => {
           },
         ]}
       />
+      <h1>Student List</h1>
       <Link href={`/${role}/manage-student/create`}>
         <Button>Create Student</Button>
       </Link>
