@@ -1,12 +1,19 @@
 import React from "react";
 import errorPage from "@/assets/404 error .png";
 import Image from "next/image";
+import { Row } from "antd";
 
 const NotFoundPage = () => {
   return (
-    <div>
+    <Row
+      justify="center"
+      align="middle"
+      style={{
+        height: "100vh",
+      }}
+    >
       <Image src={errorPage} width={1200} alt="404 error" />
-    </div>
+    </Row>
   );
 };
 
