@@ -27,7 +27,7 @@ const CreateAdmin = () => {
   };
 
   return (
-    <div>
+    <div style={{ padding: "10px" }}>
       <UMBreadCrumb
         items={[
           {
