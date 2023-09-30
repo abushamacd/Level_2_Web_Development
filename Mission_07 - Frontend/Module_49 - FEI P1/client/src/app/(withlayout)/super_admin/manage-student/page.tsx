@@ -1,5 +1,6 @@
 "use client";
 
+import ActionBar from "@/components/ui/ActionBar";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 import { getUserInfo } from "@/service/auth.service";
 import { Button } from "antd";
@@ -15,12 +16,17 @@ const ManageStudent = () => {
             label: `${role}`,
             link: `/${role}`,
           },
+          {
+            label: "student",
+            link: "/super_admin/manage-student",
+          },
         ]}
       />
-      <h1>Student List</h1>
-      <Link href={`/${role}/manage-student/create`}>
-        <Button>Create Student</Button>
-      </Link>
+      <ActionBar title={"Student List"}>
+        <Link href={`/${role}/manage-student/create`}>
+          <Button>Create Student</Button>
+        </Link>
+      </ActionBar>
     </div>
   );
 };
