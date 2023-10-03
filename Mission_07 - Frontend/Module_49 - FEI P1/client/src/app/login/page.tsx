@@ -1,6 +1,5 @@
-import LoginPage from "@/components/login/LoginPage";
+import LoginPage from "@/components/Login/Login";
 import { Metadata } from "next";
-import React from "react";
 
 export const metadata: Metadata = {
   title: "UMS | Login",
@@ -8,9 +7,9 @@ export const metadata: Metadata = {
 
 const Login = () => {
   return (
-    <div>
+    <>
       <LoginPage />
-    </div>
+    </>
   );
 };
 

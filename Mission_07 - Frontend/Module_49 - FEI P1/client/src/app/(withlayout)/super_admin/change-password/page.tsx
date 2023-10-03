@@ -1,31 +1,36 @@
 "use client";
 
-import ActionBar from "@/components/ui/ActionBar";
-import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
-import { getUserInfo } from "@/service/auth.service";
+import Form from "@/components/Forms/Form";
+import FormInput from "@/components/Forms/FormInput";
 import { Button } from "antd";
-import Link from "next/link";
 
-const ManageAdmin = () => {
-  const { role } = getUserInfo() as any;
+const ResetPassPage = () => {
+  const onSubmit = async (data: any) => {
+    try {
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
-    <div>
-      <UMBreadCrumb
-        items={[
-          {
-            label: `${role}`,
-            link: `/${role}`,
-          },
-        ]}
-      />
-      <h1>Student List</h1>
-      <ActionBar title={"Admin Liset"}>
-        <Link href={`/${role}/admin/create`}>
-          <Button>Create Student</Button>
-        </Link>
-      </ActionBar>
+    <div
+      style={{ margin: "100px 0", display: "flex", justifyContent: "center" }}
+    >
+      <Form submitHandler={onSubmit}>
+        <h3 style={{ marginBottom: "10px" }}>Reset Password</h3>
+        <div style={{ margin: "5px 0" }}>
+          <FormInput name="oldPassword" label="Old password" type="password" />
+        </div>
+        <div style={{ margin: "5px 0" }}>
+          <FormInput name="newPassword" label="New password" type="password" />
+        </div>
+        <Button type="primary" htmlType="submit">
+          submit
+        </Button>
+      </Form>
     </div>
   );
 };
 
-export default ManageAdmin;
+export default ResetPassPage;

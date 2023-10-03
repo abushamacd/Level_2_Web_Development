@@ -1,15 +1,26 @@
 "use client";
-
-import { Layout, theme } from "antd";
+import { Layout } from "antd";
 import Header from "./Header";
 
 const { Content } = Layout;
 
 const Contents = ({ children }: { children: React.ReactNode }) => {
   return (
-    <Content style={{ color: "black" }}>
+    <Content
+      style={{
+        minHeight: "100vh",
+        color: "black",
+      }}
+    >
       <Header />
-      {children}
+
+      <div
+        style={{
+          padding: "10px",
+        }}
+      >
+        {children}
+      </div>
     </Content>
   );
 };

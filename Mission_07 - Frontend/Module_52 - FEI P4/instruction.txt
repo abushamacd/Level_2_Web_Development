@@ -1,0 +1,9 @@
+#module-52_relased
+
+#UMS_Frontend Integration using Next.Js Part-4
+
+ইয়া হু আজকে আমাদের প্রোজেক্ট এর মোস্ট ইম্পরট্যান্ট ও এক্সাইটিং জিনিস দেখবো এই মডিউলে;Module Github Code link:
+
+https://github.com/Apollo-Level2-Web-Dev/university-management-frontend/tree/um-part-4
+
+.

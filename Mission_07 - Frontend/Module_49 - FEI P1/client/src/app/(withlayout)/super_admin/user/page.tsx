@@ -1,28 +1,19 @@
-"use client";
-
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
-import { getUserInfo } from "@/service/auth.service";
-import { Button } from "antd";
-import Link from "next/link";
 
-const ManageAdmin = () => {
-  const { role } = getUserInfo() as any;
+const ManageUsersPage = () => {
   return (
     <div>
       <UMBreadCrumb
         items={[
           {
-            label: `${role}`,
-            link: `/${role}`,
+            label: "super_admin",
+            link: "/super_admin",
           },
         ]}
       />
-      <h1>Student List</h1>
-      <Link href={`/${role}/admin/create`}>
-        <Button>Create Student</Button>
-      </Link>
+      <h1>User List</h1>
     </div>
   );
 };
 
-export default ManageAdmin;
+export default ManageUsersPage;

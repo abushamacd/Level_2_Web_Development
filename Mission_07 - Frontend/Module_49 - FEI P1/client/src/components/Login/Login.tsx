@@ -2,11 +2,11 @@
 import { Button, Col, Row, message } from "antd";
 import loginImage from "../../assets/login-image.png";
 import Image from "next/image";
-import Form from "@/components/forms/Form";
-import FormInput from "@/components/forms/FormInput";
+import Form from "@/components/Forms/Form";
+import FormInput from "@/components/Forms/FormInput";
 import { SubmitHandler } from "react-hook-form";
 import { useUserLoginMutation } from "@/redux/api/authApi";
-import { saveUserInfo } from "@/service/auth.service";
+import { storeUserInfo } from "@/services/auth.service";
 import { useRouter } from "next/navigation";
 
 type FormValues = {
@@ -15,21 +15,26 @@ type FormValues = {
 };
 
 const LoginPage = () => {
-  const router = useRouter();
   const [userLogin] = useUserLoginMutation();
+  const router = useRouter();
+
+  // console.log(isLoggedIn());
+
   const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
     try {
       const res = await userLogin({ ...data }).unwrap();
-      console.log(res);
+      // console.log(res);
       if (res?.accessToken) {
         router.push("/profile");
-        message.success("User log in sccessfully");
+        message.success("User logged in successfully!");
       }
-      saveUserInfo({ accessToken: res?.accessToken });
+      storeUserInfo({ accessToken: res?.accessToken });
+      // console.log(res);
     } catch (err: any) {
       console.error(err.message);
     }
   };
+
   return (
     <Row
       justify="center"

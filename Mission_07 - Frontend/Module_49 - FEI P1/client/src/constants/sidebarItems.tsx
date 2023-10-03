@@ -10,8 +10,7 @@ import {
 } from "@ant-design/icons";
 import Link from "next/link";
 import { USER_ROLE } from "./role";
-
-const sidebarItems = (role: string) => {
+export const sidebarItems = (role: string) => {
   const defaultSidebarItems: MenuProps["items"] = [
     {
       label: "Profile",
@@ -29,6 +28,7 @@ const sidebarItems = (role: string) => {
       ],
     },
   ];
+
   const commonAdminSidebarItems: MenuProps["items"] = [
     {
       label: <Link href={`/${role}/manage-student`}>Manage Students</Link>,
@@ -189,5 +189,3 @@ const sidebarItems = (role: string) => {
     return defaultSidebarItems;
   }
 };
-
-export default sidebarItems;

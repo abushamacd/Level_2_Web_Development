@@ -1,13 +1,11 @@
 "use client";
-
 import StepperForm from "@/components/StepperForm/StepperForm";
 import GuardianInfo from "@/components/StudentForms/GuardianInfo";
 import LocalGuardianInfo from "@/components/StudentForms/LocalGuardianInfo";
 import StudentBasicInfo from "@/components/StudentForms/StudentBasicInfo";
 import StudentInfo from "@/components/StudentForms/StudentInfo";
-import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 
-const CreateAdmin = () => {
+const CreateStudentPage = () => {
   const steps = [
     {
       title: "Student Information",
@@ -36,33 +34,16 @@ const CreateAdmin = () => {
   };
 
   return (
-    <>
-      <UMBreadCrumb
-        items={[
-          {
-            label: "super_admin",
-            link: "/super_admin",
-          },
-          {
-            label: "student",
-            link: "/super_admin/manage-student",
-          },
-        ]}
+    <div>
+      <h1>Create Student</h1>
+      <StepperForm
+        submitHandler={(value) => {
+          handleStudentSubmit(value);
+        }}
+        steps={steps}
       />
-      <div style={{ padding: "0px 10px" }}>
-        <h1 style={{ padding: `10px 0px` }}>Create Student</h1>
-
-        <div>
-          <StepperForm
-            submitHandler={(value) => {
-              handleStudentSubmit(value);
-            }}
-            steps={steps}
-          />
-        </div>
-      </div>
-    </>
+    </div>
   );
 };
 
-export default CreateAdmin;
+export default CreateStudentPage;

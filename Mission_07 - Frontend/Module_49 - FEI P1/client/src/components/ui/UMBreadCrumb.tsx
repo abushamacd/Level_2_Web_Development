@@ -29,12 +29,7 @@ const UMBreadCrumb = ({
     }),
   ];
 
-  return (
-    <Breadcrumb
-      style={{ padding: "10px", borderBottom: "#ddd solid 1px" }}
-      items={breadCrumbItems}
-    ></Breadcrumb>
-  );
+  return <Breadcrumb items={breadCrumbItems}></Breadcrumb>;
 };
 
 export default UMBreadCrumb;

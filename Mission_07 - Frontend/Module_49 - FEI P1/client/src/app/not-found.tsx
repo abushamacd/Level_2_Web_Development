@@ -1,7 +1,4 @@
-import React from "react";
-import errorPage from "@/assets/404 error .png";
-import Image from "next/image";
-import { Row } from "antd";
+import { Button, Row } from "antd";
 
 const NotFoundPage = () => {
   return (
@@ -12,7 +9,7 @@ const NotFoundPage = () => {
         height: "100vh",
       }}
     >
-      <Image src={errorPage} width={1200} alt="404 error" />
+      <h1>404!!! Page Not Found!</h1>
     </Row>
   );
 };
