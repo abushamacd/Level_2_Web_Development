@@ -44,8 +44,6 @@ const AdminPage = () => {
   const admins = data?.admins;
   const meta = data?.meta;
 
-  console.log(admins)
-
   const columns = [
     {
       title: "Id",
@@ -144,7 +142,7 @@ const AdminPage = () => {
           },
         ]}
       />
-      <ActionBar title="Department List">
+      <ActionBar title="Admin List">
         <Input
           size="large"
           placeholder="Search"
