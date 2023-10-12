@@ -1,0 +1,14 @@
+#module-53_relased
+
+#UMS_Frontend Integration using Next.Js Part-5
+
+আজকের মডিউলে খুবই ইম্পরট্যান্ট এবং এক্সাইটিং জিসিন দেখানো হয়েছে তাই আশা করছি খুব মনোযোগ দিয়ে মডিউলটি দেখবে সবাই।  একটা পয়েন্ট মিস গেলেই কিন্তু ভুগিচুগি লেগে যাব
+
+
+
+﻿Module Github Code link:
+
+https://github.com/Apollo-Level2-Web-Dev/university-management-frontend/tree/um-part-5
+
+;
+
